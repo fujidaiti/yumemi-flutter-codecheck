@@ -22,10 +22,11 @@ Future<SearchRepositoriesResult> searchRepositories({
 
 typedef SearchRepositoriesResult = ({
   int totalCount,
-  List<_RepositoryOverview> items,
+  List<RepositoryOverview> items,
 });
 
-typedef _RepositoryOverview = ({
+@visibleForTesting
+typedef RepositoryOverview = ({
   String name,
   String owner,
   String avatarUrl,
@@ -51,8 +52,7 @@ SearchRepositoriesResult parseResponse(Map<String, dynamic> response) {
 }
 
 @visibleForTesting
-// ignore: library_private_types_in_public_api
-_RepositoryOverview parseItem(dynamic item) {
+RepositoryOverview parseItem(dynamic item) {
   return switch (item) {
     {
       "name": String name,

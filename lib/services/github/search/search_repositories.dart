@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yumemi_flutter_codecheck/resources/github/api/search/search_repositories.dart';
+import 'package:yumemi_flutter_codecheck/resources/github/api/search/search_repositories.dart'
+    hide RepositoryOverview;
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
