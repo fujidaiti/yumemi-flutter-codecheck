@@ -10,6 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # ネットワーク
+  http: ^1.1.0
+
   # システムアイコン
   flutter_octicons: ^0.37.0
 
