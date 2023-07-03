@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yumemi_flutter_codecheck/router.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: _App()));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class _App extends StatelessWidget {
+  const _App();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp.router(
+      theme: ThemeData(
+        useMaterial3: true,
       ),
+      routerConfig: router,
     );
   }
 }
