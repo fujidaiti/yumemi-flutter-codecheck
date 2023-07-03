@@ -26,6 +26,9 @@ dependencies:
   # コード生成
   freezed_annotation: ^2.2.0
 
+  # 静的解析
+  meta: ^1.9.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
