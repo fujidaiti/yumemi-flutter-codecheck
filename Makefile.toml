@@ -9,3 +9,12 @@ script = 'flutter run --dart-define DataType=fake'
 # flutter run （本番データを使用）
 [tasks.run]
 script = 'flutter run --dart-define DataType=real'
+
+# GitHubへPush
+[tasks.push]
+script = '''
+dart fix --apply
+dart format lib/
+dart format test/
+git push
+'''
