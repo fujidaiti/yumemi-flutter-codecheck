@@ -4,6 +4,9 @@ import 'package:yumemi_flutter_codecheck/components/github/repository_overview_t
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
+typedef ErrorWidgetBuilder = Widget Function(
+    BuildContext context, Object error, StackTrace stackTrace);
+
 class RepositoryOverviewList extends ConsumerWidget {
   const RepositoryOverviewList({
     super.key,
@@ -15,12 +18,7 @@ class RepositoryOverviewList extends ConsumerWidget {
 
   final SearchQuery query;
   final WidgetBuilder loadingBuilder;
-  final Widget Function(
-    BuildContext context,
-    Object error,
-    StackTrace stackTrace,
-  ) errorBuilder;
-
+  final ErrorWidgetBuilder errorBuilder;
   final OnTapRepositoryOverviewTileCallback? onTapItem;
 
   @override
@@ -82,6 +80,8 @@ class _ListItemTile extends ConsumerWidget {
 // 検索結果１ページ当たりの最大アイテム数
 const _pageSizeLimit = 30;
 
+// 参考 : riverpodを使ったページネーション
+// https://github.com/rrousselGit/riverpod/blob/da4909ce73cb5420e48475113f365fc0a3368390/examples/marvel/lib/src/screens/home.dart#L17
 typedef _Pagination = ({
   SearchQuery query,
   int page,
