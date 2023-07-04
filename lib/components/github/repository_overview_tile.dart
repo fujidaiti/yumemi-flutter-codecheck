@@ -3,7 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 
 typedef OnTapRepositoryOverviewTileCallback = void Function(
-    RepositoryOverview rpeo);
+  RepositoryOverview rpeo,
+);
 
 class RepositoryOverviewTile extends StatelessWidget {
   const RepositoryOverviewTile({

@@ -5,7 +5,10 @@ import 'package:yumemi_flutter_codecheck/services/github/search/search_repositor
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
 typedef ErrorWidgetBuilder = Widget Function(
-    BuildContext context, Object error, StackTrace stackTrace);
+  BuildContext context,
+  Object error,
+  StackTrace stackTrace,
+);
 
 class RepositoryOverviewList extends ConsumerWidget {
   const RepositoryOverviewList({
@@ -66,10 +69,14 @@ class _ListItemTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final info = ref.watch(_itemTileInfoProvider);
-    final item = ref.watch(_itemAtIndexProvider((
-      index: info.index,
-      query: info.query,
-    )));
+    final item = ref.watch(
+      _itemAtIndexProvider(
+        (
+          index: info.index,
+          query: info.query,
+        ),
+      ),
+    );
     return RepositoryOverviewTile(
       overview: item,
       onTap: info.onTap,

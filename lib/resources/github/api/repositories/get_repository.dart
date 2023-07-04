@@ -2,8 +2,10 @@
 // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
 import 'package:yumemi_flutter_codecheck/resources/github/client.dart';
 
-Future<GetRepositoryResult> getRepository(
-    {required String name, required String owner}) async {
+Future<GetRepositoryResult> getRepository({
+  required String name,
+  required String owner,
+}) async {
   return parseResponse(
     await GitHubApiClient().getJson(
       endpoint: "/repos/$owner/$name",
