@@ -1,5 +1,8 @@
 [tasks.runner]
 script = 'flutter pub run build_runner build --delete-conflicting-outputs'
 
-[tasks.run]
+[tasks.fun]
 script = 'flutter run --dart-define DataType=fake'
+
+[tasks.run]
+script = 'flutter run --dart-define DataType=real'
