@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yumemi_flutter_codecheck/components/github/repository_overview_list.dart';
-import 'package:yumemi_flutter_codecheck/components/search_box.dart';
+import 'package:yumemi_flutter_codecheck/components/common/search_box.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
 class Search extends StatelessWidget {
