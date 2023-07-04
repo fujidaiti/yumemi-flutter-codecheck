@@ -16,7 +16,7 @@ class SearchBox extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController(text: initialText);
     final hasFocus = useState(false);
-    final hasText = useState(false);
+    final hasText = useState(initialText?.isNotEmpty == true);
 
     void clearText() {
       controller.text = "";
