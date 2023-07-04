@@ -18,5 +18,7 @@ script = '''
 dart fix --apply
 dart format lib/
 dart format test/
+git add .
+git commit -m "format"
 git push
 '''
