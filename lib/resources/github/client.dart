@@ -18,7 +18,7 @@ class GitHubApiClient extends http.BaseClient {
   // TODO; エラー処理（APIのレート制限に引っかかった時など）
   Future<Map<String, dynamic>> getJson({
     required String endpoint,
-    required Map<String, String>? queryParameters,
+    Map<String, String>? queryParameters,
   }) async {
     final url = Uri.https(_domain, endpoint, queryParameters);
     final response = await get(url);
