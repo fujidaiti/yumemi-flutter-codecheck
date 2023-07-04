@@ -10,10 +10,36 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # ネットワーク
+  http: ^1.1.0
+
+  # システムアイコン
+  flutter_octicons: ^0.37.0
+
+  # ルーティング
+  go_router: ^9.0.0
+
+  # 状態管理
+  hooks_riverpod: ^2.3.6
+  flutter_hooks: ^0.18.6
+
+  # コード生成
+  freezed_annotation: ^2.2.0
+
+  # 静的解析
+  meta: ^1.9.1
+
+  # フェイクデータ
+  faker: ^2.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
+  # コード生成
+  build_runner: ^2.4.6
+  freezed: ^2.3.5
 
 flutter:
   uses-material-design: true

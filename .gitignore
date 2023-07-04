@@ -143,7 +143,3 @@ $RECYCLE.BIN/
 # VSCode related
 .vscode/
 .idea/
-
-# Generated files
-*.freezed.dart
-*.g.dart
