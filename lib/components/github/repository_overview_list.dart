@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/components/github/repository_overview_tile.dart';
-import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
+import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
 class RepositoryOverviewList extends ConsumerWidget {
   const RepositoryOverviewList({
@@ -10,6 +10,7 @@ class RepositoryOverviewList extends ConsumerWidget {
     required this.query,
     required this.loadingBuilder,
     required this.errorBuilder,
+    this.onTapItem,
   });
 
   final SearchQuery query;
@@ -19,6 +20,8 @@ class RepositoryOverviewList extends ConsumerWidget {
     Object error,
     StackTrace stackTrace,
   ) errorBuilder;
+
+  final OnTapRepositoryOverviewTileCallback? onTapItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,10 +37,44 @@ class RepositoryOverviewList extends ConsumerWidget {
     return ListView.builder(
       itemCount: totalItemCount,
       itemBuilder: (context, index) {
-        final item =
-            ref.watch(_itemAtIndexProvider((index: index, query: query)));
-        return RepositoryOverviewTile(overview: item);
+        final _ItemTileInfo info =
+            (index: index, query: query, onTap: onTapItem);
+        // _ListItemTile`をconstにするために、プロバイダー経由でパラメータを渡すようにする
+        // [参考 : riverpodのサンプルコード]
+        // https://github.com/rrousselGit/riverpod/blob/da4909ce73cb5420e48475113f365fc0a3368390/examples/marvel/lib/src/screens/home.dart#L134-L141
+        return ProviderScope(
+          overrides: [_itemTileInfoProvider.overrideWithValue(info)],
+          child: const _ListItemTile(),
+        );
       },
+    );
+  }
+}
+
+typedef _ItemTileInfo = ({
+  int index,
+  SearchQuery query,
+  OnTapRepositoryOverviewTileCallback? onTap,
+});
+
+// このプロバイダーを経由して`_ListItemTile`パラメータを渡すので、
+// `_ListItemTile`を使うときは必ず`ProviderScope`でこのプロバイダーの値を上書きする
+final _itemTileInfoProvider =
+    Provider<_ItemTileInfo>((ref) => throw UnimplementedError());
+
+class _ListItemTile extends ConsumerWidget {
+  const _ListItemTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final info = ref.watch(_itemTileInfoProvider);
+    final item = ref.watch(_itemAtIndexProvider((
+      index: info.index,
+      query: info.query,
+    )));
+    return RepositoryOverviewTile(
+      overview: item,
+      onTap: info.onTap,
     );
   }
 }
@@ -53,11 +90,13 @@ typedef _Pagination = ({
 final _paginatedSearchResultProvider = Provider.autoDispose.family(
   (ref, _Pagination pagination) {
     return ref.watch(
-      repositoriesProvider((
-        query: pagination.query,
-        page: pagination.page,
-        perPage: _pageSizeLimit,
-      )),
+      repositoriesProvider(
+        (
+          query: pagination.query,
+          page: pagination.page,
+          perPage: _pageSizeLimit,
+        ),
+      ),
     );
   },
 );

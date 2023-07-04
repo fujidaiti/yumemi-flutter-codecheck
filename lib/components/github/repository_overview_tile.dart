@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 
+typedef OnTapRepositoryOverviewTileCallback = void Function(
+    RepositoryOverview rpeo);
+
 class RepositoryOverviewTile extends StatelessWidget {
   const RepositoryOverviewTile({
     super.key,
     required this.overview,
+    this.onTap,
   });
 
   final AsyncValue<RepositoryOverview> overview;
+  final OnTapRepositoryOverviewTileCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,10 @@ class RepositoryOverviewTile extends StatelessWidget {
     return Material(
       color: Theme.of(context).colorScheme.surface,
       child: InkWell(
-        onTap: () {},
+        onTap: switch ((onTap, overview.asData)) {
+          (var callback?, var data?) => () => callback(data.value),
+          _ => null,
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
