@@ -5,14 +5,16 @@ import 'package:flutter_octicons/flutter_octicons.dart';
 class SearchBox extends HookWidget {
   const SearchBox({
     super.key,
+    this.initialText,
     this.onSubmitted,
   });
 
+  final String? initialText;
   final void Function(String text)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
-    final controller = useTextEditingController();
+    final controller = useTextEditingController(text: initialText);
     final hasFocus = useState(false);
     final hasText = useState(false);
 
