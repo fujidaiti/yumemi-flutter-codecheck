@@ -20,6 +20,8 @@ final fakeRepositoriesProvider = FutureProvider.autoDispose.family(
       },
     );
 
+    await Future.delayed(const Duration(milliseconds: 750));
+
     return (totalCount, items);
   },
 );
