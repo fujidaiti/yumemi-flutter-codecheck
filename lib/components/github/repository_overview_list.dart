@@ -87,16 +87,27 @@ typedef _Pagination = ({
   int page,
 });
 
-final _paginatedSearchResultProvider = Provider.autoDispose.family(
-  (ref, _Pagination pagination) {
-    return ref.watch(
+final _paginatedSearchResultProvider = FutureProvider.autoDispose.family(
+  (ref, _Pagination pagination) async {
+    // TODO; デバウンスタイムを調整
+    // 250ms以内に30個のアイテムを読み飛ばすのって物理的に難しいのでは...？
+    const debounceDuration = Duration(milliseconds: 250);
+
+    // 読み飛ばされたページを読み込まないようにするためのデバウンス処理（例えばものすごい速さでスクロールした場合）
+    // 参考 : https://github.com/rrousselGit/riverpod/blob/da4909ce73cb5420e48475113f365fc0a3368390/examples/marvel/lib/src/screens/home.dart#L29-L33
+    bool isCancelled = false;
+    ref.onDispose(() => isCancelled = true);
+    await Future.delayed(debounceDuration);
+    // TODO; どんな例外を投げれば良い？
+    if (isCancelled) throw UnimplementedError();
+    return await ref.watch(
       repositoriesProvider(
         (
           query: pagination.query,
           page: pagination.page,
           perPage: _pageSizeLimit,
         ),
-      ),
+      ).future,
     );
   },
 );
