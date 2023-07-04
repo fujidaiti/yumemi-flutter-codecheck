@@ -11,7 +11,8 @@ final fakeRepositoriesProvider = FutureProvider.autoDispose.family(
       (_) {
         return RepositoryOverview(
           name: faker.lorem.word(),
-          description: faker.lorem.sentence(),
+          description:
+              faker.lorem.sentences(faker.randomGenerator.integer(3)).join(" "),
           owner: faker.lorem.word(),
           avatarUrl: faker.internet.httpsUrl(),
           language: faker.lorem.word(),

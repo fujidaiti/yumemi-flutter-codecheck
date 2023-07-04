@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yumemi_flutter_codecheck/fakes/services/github/faker.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/types/repository.dart';
 
 final fakeRepositoryProvider = FutureProvider.autoDispose.family(
@@ -7,13 +8,14 @@ final fakeRepositoryProvider = FutureProvider.autoDispose.family(
     return Repository(
       name: params.name,
       owner: params.owner,
-      avatarUrl: "https://avatars.githubusercontent.com/u/14101776?v=4",
-      description: "This is the offcial repository of Flutter project",
-      language: "Dart",
-      stargazersCount: 20000,
-      watchersCount: 100,
-      forksCount: 345,
-      openIssuesCount: 540,
+      avatarUrl: faker.internet.httpsUrl(),
+      description:
+          faker.lorem.sentences(faker.randomGenerator.integer(3)).join(" "),
+      language: faker.lorem.word(),
+      stargazersCount: faker.randomGenerator.integer(2000),
+      watchersCount: faker.randomGenerator.integer(2000),
+      forksCount: faker.randomGenerator.integer(200),
+      openIssuesCount: faker.randomGenerator.integer(200),
     );
   },
 );
