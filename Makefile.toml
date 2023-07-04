@@ -19,6 +19,6 @@ dart fix --apply
 dart format lib/
 dart format test/
 git add .
-git commit -m "format"
+git commit -m "format" || echo "No changes to commit"
 git push
 '''
