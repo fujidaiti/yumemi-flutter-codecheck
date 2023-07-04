@@ -29,6 +29,9 @@ dependencies:
   # 静的解析
   meta: ^1.9.1
 
+  # フェイクデータ
+  faker: ^2.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
