@@ -78,6 +78,7 @@ class _ListItemTile extends ConsumerWidget {
 }
 
 // 検索結果１ページ当たりの最大アイテム数
+// TODO; 読み込みページサイズを調整
 const _pageSizeLimit = 30;
 
 // 参考 : riverpodを使ったページネーション
