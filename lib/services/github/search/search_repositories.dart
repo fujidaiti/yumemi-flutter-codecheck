@@ -4,14 +4,14 @@ import 'package:yumemi_flutter_codecheck/resources/github/api/search/search_repo
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
-typedef _RepositoriesProviderParams = ({
+typedef RepositoriesProviderParams = ({
   SearchQuery query,
   int page,
   int perPage,
 });
 
 final repositoriesProvider = FutureProvider.autoDispose.family(
-  (ref, _RepositoriesProviderParams params) async {
+  (ref, RepositoriesProviderParams params) async {
     final result = await searchRepositories(
       query: params.query.keywords,
       page: params.page,

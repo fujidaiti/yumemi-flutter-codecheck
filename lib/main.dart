@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yumemi_flutter_codecheck/fakes/fakes.dart';
 import 'package:yumemi_flutter_codecheck/router.dart';
 
 void main() {
-  runApp(const ProviderScope(child: _App()));
+  runApp(
+    ProviderScope(
+      overrides: fakeProviders,
+      child: const _App(),
+    ),
+  );
 }
 
 class _App extends StatelessWidget {
