@@ -38,41 +38,33 @@ class RepositoryOverviewList extends ConsumerWidget {
     return ListView.builder(
       itemCount: totalItemCount,
       itemBuilder: (context, index) {
-        final _ItemTileInfo info =
-            (index: index, query: query, onTap: onTapItem);
-        return _ListItemTile(info: info);
+        return _ListItemTile(
+          index: index,
+          query: query,
+          onTap: onTapItem,
+        );
       },
     );
   }
 }
 
-typedef _ItemTileInfo = ({
-  int index,
-  SearchQuery query,
-  OnTapRepositoryOverviewTileCallback? onTap,
-});
-
 class _ListItemTile extends ConsumerWidget {
   const _ListItemTile({
-    required this.info,
+    required this.index,
+    required this.query,
+    required this.onTap,
   });
 
-  final _ItemTileInfo info;
+  final int index;
+  final SearchQuery query;
+  final OnTapRepositoryOverviewTileCallback? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(
-      _itemAtIndexProvider(
-        (
-          index: info.index,
-          query: info.query,
-        ),
-      ),
+      _itemAtIndexProvider((index: index, query: query)),
     );
-    return RepositoryOverviewTile(
-      overview: item,
-      onTap: info.onTap,
-    );
+    return RepositoryOverviewTile(overview: item, onTap: onTap);
   }
 }
 
