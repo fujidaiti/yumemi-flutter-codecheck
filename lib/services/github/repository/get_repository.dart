@@ -17,7 +17,7 @@ final repositoryProvider = FutureProvider.autoDispose.family(
       stargazersCount: result.stargazersCount,
       watchersCount: result.watchersCount,
       forksCount: result.forksCount,
-      openIssuesCount: result.openIssuesCount,
+      openIssuesAndPullRequestsCount: result.openIssuesAndPullRequestsCount,
     );
   },
 );

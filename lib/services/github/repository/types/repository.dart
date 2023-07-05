@@ -1,5 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'repository.freezed.dart';
 
@@ -14,6 +14,6 @@ class Repository with _$Repository {
     required int stargazersCount,
     required int watchersCount,
     required int forksCount,
-    required int openIssuesCount,
+    required int openIssuesAndPullRequestsCount,
   }) = _Repository;
 }

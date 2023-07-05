@@ -83,7 +83,7 @@ class RepositoryDetails extends ConsumerWidget {
     final issues = _buildStatusTile(
       context: context,
       title: "Issues",
-      counter: repository.openIssuesCount,
+      counter: repository.openIssuesAndPullRequestsCount,
       icon: const Icon(OctIcons.issue_opened_24),
     );
 
