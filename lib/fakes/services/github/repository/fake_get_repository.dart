@@ -16,6 +16,7 @@ final fakeRepositoryProvider = FutureProvider.autoDispose.family(
       watchersCount: faker.randomGenerator.integer(2000),
       forksCount: faker.randomGenerator.integer(200),
       openIssuesCount: faker.randomGenerator.integer(200),
+      openPullRequestsCount: faker.randomGenerator.integer(200),
     );
   },
 );

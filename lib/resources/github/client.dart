@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 const _mediaTyle = "application/vnd.github+json";
@@ -25,5 +24,3 @@ class GitHubApiClient extends http.BaseClient {
     return jsonDecode(response.body);
   }
 }
-
-final gitHubApiClientProvider = Provider((ref) => GitHubApiClient());

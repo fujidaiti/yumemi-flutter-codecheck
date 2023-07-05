@@ -87,6 +87,13 @@ class RepositoryDetails extends ConsumerWidget {
       icon: const Icon(OctIcons.issue_opened_24),
     );
 
+    final pullRequests = _buildStatusTile(
+      context: context,
+      title: "Pull Requests",
+      counter: repository.openPullRequestsCount,
+      icon: const Icon(OctIcons.git_pull_request_24),
+    );
+
     final language = switch (repository.language) {
       null => null,
       final lang => ListTile(
@@ -104,6 +111,7 @@ class RepositoryDetails extends ConsumerWidget {
           forks,
           watchers,
           issues,
+          pullRequests,
           if (language != null) language,
         ],
       ),

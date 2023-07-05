@@ -22,7 +22,7 @@ typedef GetRepositoryResult = ({
   int stargazersCount,
   int watchersCount,
   int forksCount,
-  int openIssuesCount,
+  int openIssuesAndPullRequestsCount,
 });
 
 GetRepositoryResult parseResponse(Map<String, dynamic> response) {
@@ -36,7 +36,7 @@ GetRepositoryResult parseResponse(Map<String, dynamic> response) {
       // "subscribers_count"の値がGitHub上で表示される"3.5k watching"の値に対応する（"watchers_count"ではない）
       // https://github.com/orgs/community/discussions/24795#discussioncomment-3245470
       "subscribers_count": int watchersCount,
-      "open_issues": int openIssuesCount,
+      "open_issues": int openIssuesAndPullRequestsCount,
       "owner": {
         "login": String owner,
         "avatar_url": String avatarUrl,
@@ -51,7 +51,7 @@ GetRepositoryResult parseResponse(Map<String, dynamic> response) {
         stargazersCount: stargazersCount,
         watchersCount: watchersCount,
         forksCount: forksCount,
-        openIssuesCount: openIssuesCount,
+        openIssuesAndPullRequestsCount: openIssuesAndPullRequestsCount,
       ),
     // TODO; 例外処理
     _ => throw UnimplementedError(),

@@ -47,7 +47,9 @@ SearchRepositoriesResult parseResponse(Map<String, dynamic> response) {
         items: [...items.map(parseItem)],
       ),
     // TODO; 例外処理
-    _ => throw UnimplementedError("[search-repositories] 無効なデータ形式: $response"),
+    _ => throw UnimplementedError(
+        "[search-repositories] 無効なデータ形式: $response",
+      ),
   };
 }
 
@@ -73,6 +75,8 @@ RepositoryOverview parseItem(dynamic item) {
         stargazersCount: stargazersCount,
       ),
     // TODO; 例外処理
-    _ => throw UnimplementedError("[repository-overview] 無効なデータ形式 : $item"),
+    _ => throw UnimplementedError(
+        "[repository-overview] 無効なデータ形式 : $item",
+      ),
   };
 }
