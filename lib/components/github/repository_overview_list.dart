@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/components/github/repository_overview_tile.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
@@ -79,7 +80,9 @@ class _ListItemTile extends ConsumerWidget {
     );
     return RepositoryOverviewTile(
       overview: item,
-      onTap: info.onTap,
+      onTap: (repo) {
+        context.push("/repository/${repo.owner}/${repo.name}");
+      },
     );
   }
 }
