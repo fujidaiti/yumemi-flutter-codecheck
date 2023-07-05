@@ -24,7 +24,8 @@ mixin _$Repository {
   int get stargazersCount => throw _privateConstructorUsedError;
   int get watchersCount => throw _privateConstructorUsedError;
   int get forksCount => throw _privateConstructorUsedError;
-  int get openIssuesAndPullRequestsCount => throw _privateConstructorUsedError;
+  int get openIssuesCount => throw _privateConstructorUsedError;
+  int get openPullRequestsCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RepositoryCopyWith<Repository> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $RepositoryCopyWith<$Res> {
       int stargazersCount,
       int watchersCount,
       int forksCount,
-      int openIssuesAndPullRequestsCount});
+      int openIssuesCount,
+      int openPullRequestsCount});
 }
 
 /// @nodoc
@@ -70,7 +72,8 @@ class _$RepositoryCopyWithImpl<$Res, $Val extends Repository>
     Object? stargazersCount = null,
     Object? watchersCount = null,
     Object? forksCount = null,
-    Object? openIssuesAndPullRequestsCount = null,
+    Object? openIssuesCount = null,
+    Object? openPullRequestsCount = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -105,9 +108,13 @@ class _$RepositoryCopyWithImpl<$Res, $Val extends Repository>
           ? _value.forksCount
           : forksCount // ignore: cast_nullable_to_non_nullable
               as int,
-      openIssuesAndPullRequestsCount: null == openIssuesAndPullRequestsCount
-          ? _value.openIssuesAndPullRequestsCount
-          : openIssuesAndPullRequestsCount // ignore: cast_nullable_to_non_nullable
+      openIssuesCount: null == openIssuesCount
+          ? _value.openIssuesCount
+          : openIssuesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      openPullRequestsCount: null == openPullRequestsCount
+          ? _value.openPullRequestsCount
+          : openPullRequestsCount // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -130,7 +137,8 @@ abstract class _$$_RepositoryCopyWith<$Res>
       int stargazersCount,
       int watchersCount,
       int forksCount,
-      int openIssuesAndPullRequestsCount});
+      int openIssuesCount,
+      int openPullRequestsCount});
 }
 
 /// @nodoc
@@ -152,7 +160,8 @@ class __$$_RepositoryCopyWithImpl<$Res>
     Object? stargazersCount = null,
     Object? watchersCount = null,
     Object? forksCount = null,
-    Object? openIssuesAndPullRequestsCount = null,
+    Object? openIssuesCount = null,
+    Object? openPullRequestsCount = null,
   }) {
     return _then(_$_Repository(
       name: null == name
@@ -187,9 +196,13 @@ class __$$_RepositoryCopyWithImpl<$Res>
           ? _value.forksCount
           : forksCount // ignore: cast_nullable_to_non_nullable
               as int,
-      openIssuesAndPullRequestsCount: null == openIssuesAndPullRequestsCount
-          ? _value.openIssuesAndPullRequestsCount
-          : openIssuesAndPullRequestsCount // ignore: cast_nullable_to_non_nullable
+      openIssuesCount: null == openIssuesCount
+          ? _value.openIssuesCount
+          : openIssuesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      openPullRequestsCount: null == openPullRequestsCount
+          ? _value.openPullRequestsCount
+          : openPullRequestsCount // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -207,7 +220,8 @@ class _$_Repository with DiagnosticableTreeMixin implements _Repository {
       required this.stargazersCount,
       required this.watchersCount,
       required this.forksCount,
-      required this.openIssuesAndPullRequestsCount});
+      required this.openIssuesCount,
+      required this.openPullRequestsCount});
 
   @override
   final String name;
@@ -226,11 +240,13 @@ class _$_Repository with DiagnosticableTreeMixin implements _Repository {
   @override
   final int forksCount;
   @override
-  final int openIssuesAndPullRequestsCount;
+  final int openIssuesCount;
+  @override
+  final int openPullRequestsCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Repository(name: $name, owner: $owner, avatarUrl: $avatarUrl, description: $description, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesAndPullRequestsCount: $openIssuesAndPullRequestsCount)';
+    return 'Repository(name: $name, owner: $owner, avatarUrl: $avatarUrl, description: $description, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount, openPullRequestsCount: $openPullRequestsCount)';
   }
 
   @override
@@ -246,8 +262,9 @@ class _$_Repository with DiagnosticableTreeMixin implements _Repository {
       ..add(DiagnosticsProperty('stargazersCount', stargazersCount))
       ..add(DiagnosticsProperty('watchersCount', watchersCount))
       ..add(DiagnosticsProperty('forksCount', forksCount))
-      ..add(DiagnosticsProperty(
-          'openIssuesAndPullRequestsCount', openIssuesAndPullRequestsCount));
+      ..add(DiagnosticsProperty('openIssuesCount', openIssuesCount))
+      ..add(
+          DiagnosticsProperty('openPullRequestsCount', openPullRequestsCount));
   }
 
   @override
@@ -269,10 +286,10 @@ class _$_Repository with DiagnosticableTreeMixin implements _Repository {
                 other.watchersCount == watchersCount) &&
             (identical(other.forksCount, forksCount) ||
                 other.forksCount == forksCount) &&
-            (identical(other.openIssuesAndPullRequestsCount,
-                    openIssuesAndPullRequestsCount) ||
-                other.openIssuesAndPullRequestsCount ==
-                    openIssuesAndPullRequestsCount));
+            (identical(other.openIssuesCount, openIssuesCount) ||
+                other.openIssuesCount == openIssuesCount) &&
+            (identical(other.openPullRequestsCount, openPullRequestsCount) ||
+                other.openPullRequestsCount == openPullRequestsCount));
   }
 
   @override
@@ -286,7 +303,8 @@ class _$_Repository with DiagnosticableTreeMixin implements _Repository {
       stargazersCount,
       watchersCount,
       forksCount,
-      openIssuesAndPullRequestsCount);
+      openIssuesCount,
+      openPullRequestsCount);
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +323,8 @@ abstract class _Repository implements Repository {
       required final int stargazersCount,
       required final int watchersCount,
       required final int forksCount,
-      required final int openIssuesAndPullRequestsCount}) = _$_Repository;
+      required final int openIssuesCount,
+      required final int openPullRequestsCount}) = _$_Repository;
 
   @override
   String get name;
@@ -324,7 +343,9 @@ abstract class _Repository implements Repository {
   @override
   int get forksCount;
   @override
-  int get openIssuesAndPullRequestsCount;
+  int get openIssuesCount;
+  @override
+  int get openPullRequestsCount;
   @override
   @JsonKey(ignore: true)
   _$$_RepositoryCopyWith<_$_Repository> get copyWith =>

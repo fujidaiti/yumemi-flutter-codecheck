@@ -14,6 +14,7 @@ class Repository with _$Repository {
     required int stargazersCount,
     required int watchersCount,
     required int forksCount,
-    required int openIssuesAndPullRequestsCount,
+    required int openIssuesCount,
+    required int openPullRequestsCount,
   }) = _Repository;
 }
