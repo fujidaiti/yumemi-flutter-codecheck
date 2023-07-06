@@ -3,28 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/handlers.dart';
 
 class UnkownErrorWidget extends StatelessWidget {
-  factory UnkownErrorWidget(Object error, StackTrace? stackTrace) {
+  /// [child]が`null`でない場合、[build]メソッドは[child]をそのまま返す。
+  factory UnkownErrorWidget(
+    Object error,
+    StackTrace? stackTrace, {
+    Widget? child,
+  }) {
     if (kReleaseMode) {
       consumeError(error, stackTrace);
     } else {
       handleError(error, stackTrace);
     }
-    return UnkownErrorWidget._(error);
+    return UnkownErrorWidget._(error, child);
   }
 
-  const UnkownErrorWidget._(this.error);
+  const UnkownErrorWidget._(
+    this.error, [
+    this.child,
+  ]);
 
   final Object error;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return switch (kDebugMode) {
-      true => ErrorWidget(error),
-      false => _buildPrettyErrorView(context),
-    };
-  }
+    if (child != null) {
+      return child!;
+    }
 
-  Widget _buildPrettyErrorView(BuildContext context) {
     void backToPrevious() {
       Navigator.of(context).maybePop();
     }

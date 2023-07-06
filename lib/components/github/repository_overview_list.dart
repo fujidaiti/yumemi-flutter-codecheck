@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yumemi_flutter_codecheck/common/errors/types/request_aborted_exception.dart';
 import 'package:yumemi_flutter_codecheck/components/github/repository_overview_tile.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
@@ -82,7 +83,6 @@ typedef _Pagination = ({
 final _paginatedSearchResultProvider = FutureProvider.autoDispose.family(
   (ref, _Pagination pagination) async {
     // TODO; デバウンスタイムを調整
-    // 250ms以内に30個のアイテムを読み飛ばすのって物理的に難しいのでは...？
     const debounceDuration = Duration(milliseconds: 250);
 
     // 読み飛ばされたページを読み込まないようにするためのデバウンス処理（例えばものすごい速さでスクロールした場合）
@@ -90,8 +90,13 @@ final _paginatedSearchResultProvider = FutureProvider.autoDispose.family(
     bool isCancelled = false;
     ref.onDispose(() => isCancelled = true);
     await Future.delayed(debounceDuration);
-    // TODO; どんな例外を投げれば良い？
-    if (isCancelled) throw UnimplementedError();
+
+    if (isCancelled) {
+      throw const RequestAbortedException(
+        "_paginatedSearchResultProvider",
+      );
+    }
+
     return await ref.watch(
       repositoriesProvider(
         (
