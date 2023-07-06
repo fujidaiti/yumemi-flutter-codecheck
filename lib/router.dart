@@ -25,7 +25,7 @@ final router = GoRouter(
       builder: (context, state) {
         return RepositoryDetails(
           name: state.pathParameters["name"]!,
-          owner: state.pathParameters["woner"]!,
+          owner: state.pathParameters["owner"]!,
         );
       },
     ),
