@@ -7,10 +7,12 @@ class SearchBox extends HookWidget {
     super.key,
     this.initialText,
     this.onSubmitted,
+    this.onTextChanged,
   });
 
   final String? initialText;
   final void Function(String text)? onSubmitted;
+  final void Function(String text)? onTextChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class SearchBox extends HookWidget {
 
     void onTextChanged(String text) {
       hasText.value = text.isNotEmpty;
+      this.onTextChanged?.call(text);
     }
 
     void onBackButtonPressed() => Navigator.of(context).pop();
