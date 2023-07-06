@@ -5,12 +5,12 @@ script = 'flutter pub run build_runner build --delete-conflicting-outputs'
 # flutter run （フェイクデータを使用）
 [tasks.fun]
 dependencies = ["runner"]
-script = 'flutter run --dart-define DataType=fake'
+script = 'flutter run --dart-define DataType=fake ${@}'
 
 # flutter run （本番データを使用）
 [tasks.run]
 dependencies = ["runner"]
-script = 'flutter run --dart-define DataType=real'
+script = 'flutter run --dart-define DataType=real ${@}'
 
 # GitHubへPush
 [tasks.push]
