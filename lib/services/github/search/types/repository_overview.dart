@@ -9,7 +9,7 @@ class RepositoryOverview with _$RepositoryOverview {
     required String name,
     required String? description,
     required String owner,
-    required String avatarUrl,
+    required String? avatarUrl,
     required String? language,
     required int stars,
   }) = _RepositoryOverview;

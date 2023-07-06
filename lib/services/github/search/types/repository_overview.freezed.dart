@@ -19,7 +19,7 @@ mixin _$RepositoryOverview {
   String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
-  String get avatarUrl => throw _privateConstructorUsedError;
+  String? get avatarUrl => throw _privateConstructorUsedError;
   String? get language => throw _privateConstructorUsedError;
   int get stars => throw _privateConstructorUsedError;
 
@@ -38,7 +38,7 @@ abstract class $RepositoryOverviewCopyWith<$Res> {
       {String name,
       String? description,
       String owner,
-      String avatarUrl,
+      String? avatarUrl,
       String? language,
       int stars});
 }
@@ -59,7 +59,7 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
     Object? name = null,
     Object? description = freezed,
     Object? owner = null,
-    Object? avatarUrl = null,
+    Object? avatarUrl = freezed,
     Object? language = freezed,
     Object? stars = null,
   }) {
@@ -76,10 +76,10 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: null == avatarUrl
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       language: freezed == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
@@ -104,7 +104,7 @@ abstract class _$$_RepositoryOverviewCopyWith<$Res>
       {String name,
       String? description,
       String owner,
-      String avatarUrl,
+      String? avatarUrl,
       String? language,
       int stars});
 }
@@ -123,7 +123,7 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
     Object? name = null,
     Object? description = freezed,
     Object? owner = null,
-    Object? avatarUrl = null,
+    Object? avatarUrl = freezed,
     Object? language = freezed,
     Object? stars = null,
   }) {
@@ -140,10 +140,10 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: null == avatarUrl
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       language: freezed == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
@@ -176,7 +176,7 @@ class _$_RepositoryOverview
   @override
   final String owner;
   @override
-  final String avatarUrl;
+  final String? avatarUrl;
   @override
   final String? language;
   @override
@@ -233,7 +233,7 @@ abstract class _RepositoryOverview implements RepositoryOverview {
       {required final String name,
       required final String? description,
       required final String owner,
-      required final String avatarUrl,
+      required final String? avatarUrl,
       required final String? language,
       required final int stars}) = _$_RepositoryOverview;
 
@@ -244,7 +244,7 @@ abstract class _RepositoryOverview implements RepositoryOverview {
   @override
   String get owner;
   @override
-  String get avatarUrl;
+  String? get avatarUrl;
   @override
   String? get language;
   @override

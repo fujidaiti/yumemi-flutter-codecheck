@@ -7,7 +7,7 @@ class AvatarIcon extends StatelessWidget {
     this.size = 32,
   });
 
-  final String url;
+  final String? url;
   final int size;
 
   @override
@@ -15,11 +15,14 @@ class AvatarIcon extends StatelessWidget {
     return CircleAvatar(
       radius: size / 2.0,
       backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-      backgroundImage: ResizeImage.resizeIfNeeded(
-        size,
-        size,
-        NetworkImage(url),
-      ),
+      backgroundImage: switch (url) {
+        null => null,
+        final url => ResizeImage.resizeIfNeeded(
+            size,
+            size,
+            NetworkImage(url),
+          ),
+      },
     );
   }
 }

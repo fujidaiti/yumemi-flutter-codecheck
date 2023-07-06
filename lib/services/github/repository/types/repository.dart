@@ -8,7 +8,7 @@ class Repository with _$Repository {
   const factory Repository({
     required String name,
     required String owner,
-    required String avatarUrl,
+    required String? avatarUrl,
     required String? description,
     required String? language,
     required int stargazersCount,
