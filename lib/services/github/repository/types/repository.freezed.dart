@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Repository {
   String get name => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
-  String get avatarUrl => throw _privateConstructorUsedError;
+  String? get avatarUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get language => throw _privateConstructorUsedError;
   int get stargazersCount => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $RepositoryCopyWith<$Res> {
   $Res call(
       {String name,
       String owner,
-      String avatarUrl,
+      String? avatarUrl,
       String? description,
       String? language,
       int stargazersCount,
@@ -66,7 +66,7 @@ class _$RepositoryCopyWithImpl<$Res, $Val extends Repository>
   $Res call({
     Object? name = null,
     Object? owner = null,
-    Object? avatarUrl = null,
+    Object? avatarUrl = freezed,
     Object? description = freezed,
     Object? language = freezed,
     Object? stargazersCount = null,
@@ -84,10 +84,10 @@ class _$RepositoryCopyWithImpl<$Res, $Val extends Repository>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: null == avatarUrl
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ abstract class _$$_RepositoryCopyWith<$Res>
   $Res call(
       {String name,
       String owner,
-      String avatarUrl,
+      String? avatarUrl,
       String? description,
       String? language,
       int stargazersCount,
@@ -154,7 +154,7 @@ class __$$_RepositoryCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? owner = null,
-    Object? avatarUrl = null,
+    Object? avatarUrl = freezed,
     Object? description = freezed,
     Object? language = freezed,
     Object? stargazersCount = null,
@@ -172,10 +172,10 @@ class __$$_RepositoryCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: null == avatarUrl
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -228,7 +228,7 @@ class _$_Repository with DiagnosticableTreeMixin implements _Repository {
   @override
   final String owner;
   @override
-  final String avatarUrl;
+  final String? avatarUrl;
   @override
   final String? description;
   @override
@@ -317,7 +317,7 @@ abstract class _Repository implements Repository {
   const factory _Repository(
       {required final String name,
       required final String owner,
-      required final String avatarUrl,
+      required final String? avatarUrl,
       required final String? description,
       required final String? language,
       required final int stargazersCount,
@@ -331,7 +331,7 @@ abstract class _Repository implements Repository {
   @override
   String get owner;
   @override
-  String get avatarUrl;
+  String? get avatarUrl;
   @override
   String? get description;
   @override
