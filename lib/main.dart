@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/config/env.dart' as env;
 import 'package:yumemi_flutter_codecheck/config/error.dart';
 import 'package:yumemi_flutter_codecheck/config/logging/logging.dart';
+import 'package:yumemi_flutter_codecheck/config/theme.dart';
 import 'package:yumemi_flutter_codecheck/fakes/fakes.dart';
 import 'package:yumemi_flutter_codecheck/router.dart';
 
@@ -30,9 +31,9 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: appLightTheme,
+      darkTheme: appDarkTheme,
+      themeMode: ThemeMode.system,
       routerConfig: router,
     );
   }

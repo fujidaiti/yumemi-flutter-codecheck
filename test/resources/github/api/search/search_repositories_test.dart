@@ -1,47 +1,27 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yumemi_flutter_codecheck/resources/github/api/search/search_repositories.dart';
 
+import 'data/test_search_repositories_response.dart';
+
 void main() {
   group("parseResponse", () {
     test(
       '正しいフォーマットのデータをパースできる',
       () {
-        // TODO;　もう少しちゃんとしたデータでテストする
-        const repoName = "flutter";
-        const repoDescription = "hoge";
-        const language = "Dart";
-        const stars = 100;
-        const ownerName = "flutter";
-        const ownerAvatarUrl = "http";
+        final (:totalCount, :items) =
+            parseResponse(testSearchRepositoriesResponse);
 
-        final response = {
-          "total_count": 1,
-          "items": [
-            {
-              "name": repoName,
-              "description": repoDescription,
-              "language": language,
-              "stargazers_count": stars,
-              "owner": {
-                "login": ownerName,
-                "avatar_url": ownerAvatarUrl,
-              },
-            }
-          ],
-        };
-
-        final (:totalCount, :items) = parseResponse(response);
-
-        expect(totalCount, 1);
+        expect(totalCount, 549751);
         expect(items.length, 1);
 
         RepositoryOverview expectedItem = (
-          name: repoName,
-          description: repoDescription,
-          language: language,
-          stargazersCount: stars,
-          owner: ownerName,
-          avatarUrl: ownerAvatarUrl,
+          name: "flutter",
+          owner: "flutter",
+          description:
+              "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+          language: "Dart",
+          avatarUrl: "https://avatars.githubusercontent.com/u/14101776?v=4",
+          stargazersCount: 154797,
         );
 
         expect(items.first, expectedItem);
