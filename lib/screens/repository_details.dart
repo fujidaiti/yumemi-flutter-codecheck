@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/github/avatar_icon.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/get_repository.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/types/repository.dart';
@@ -134,11 +135,8 @@ class RepositoryDetails extends ConsumerWidget {
     );
   }
 
-  // TODO; エラー処理
   Widget _buildError(Object error, StackTrace stackTrace) {
-    return Center(
-      child: Text("$error"),
-    );
+    return UnkownErrorWidget(error, stackTrace);
   }
 
   Widget _buildLoading() {

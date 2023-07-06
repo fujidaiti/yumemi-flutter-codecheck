@@ -1,6 +1,7 @@
 // ドキュメント ↓
 // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
 import 'package:yumemi_flutter_codecheck/resources/github/client.dart';
+import 'package:yumemi_flutter_codecheck/resources/github/exceptions.dart';
 
 Future<GetRepositoryResult> getRepository({
   required String name,
@@ -53,7 +54,6 @@ GetRepositoryResult parseResponse(Map<String, dynamic> response) {
         forksCount: forksCount,
         openIssuesAndPullRequestsCount: openIssuesAndPullRequestsCount,
       ),
-    // TODO; 例外処理
-    _ => throw UnimplementedError(),
+    _ => throw UnexpectedJsonResponseException(json: response),
   };
 }

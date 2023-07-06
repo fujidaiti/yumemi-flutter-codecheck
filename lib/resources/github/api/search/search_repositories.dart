@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:yumemi_flutter_codecheck/resources/github/client.dart';
+import 'package:yumemi_flutter_codecheck/resources/github/exceptions.dart';
 
 // ドキュメント ↓
 // https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
@@ -35,8 +36,34 @@ typedef RepositoryOverview = ({
   int stargazersCount,
 });
 
+// class ResponseParser
+
 @visibleForTesting
 SearchRepositoriesResult parseResponse(Map<String, dynamic> response) {
+  RepositoryOverview parseItem(dynamic item) {
+    return switch (item) {
+      {
+        "name": String name,
+        "description": String? description,
+        "language": String? language,
+        "stargazers_count": int stargazersCount,
+        "owner": {
+          "login": String owner,
+          "avatar_url": String avatarUrl,
+        },
+      } =>
+        (
+          name: name,
+          owner: owner,
+          avatarUrl: avatarUrl,
+          language: language,
+          description: description,
+          stargazersCount: stargazersCount,
+        ),
+      _ => throw UnexpectedJsonResponseException(json: response),
+    };
+  }
+
   return switch (response) {
     {
       "total_count": int totalCount,
@@ -46,37 +73,6 @@ SearchRepositoriesResult parseResponse(Map<String, dynamic> response) {
         totalCount: totalCount,
         items: [...items.map(parseItem)],
       ),
-    // TODO; 例外処理
-    _ => throw UnimplementedError(
-        "[search-repositories] 無効なデータ形式: $response",
-      ),
-  };
-}
-
-@visibleForTesting
-RepositoryOverview parseItem(dynamic item) {
-  return switch (item) {
-    {
-      "name": String name,
-      "description": String? description,
-      "language": String? language,
-      "stargazers_count": int stargazersCount,
-      "owner": {
-        "login": String owner,
-        "avatar_url": String avatarUrl,
-      },
-    } =>
-      (
-        name: name,
-        owner: owner,
-        avatarUrl: avatarUrl,
-        language: language,
-        description: description,
-        stargazersCount: stargazersCount,
-      ),
-    // TODO; 例外処理
-    _ => throw UnimplementedError(
-        "[repository-overview] 無効なデータ形式 : $item",
-      ),
+    _ => throw UnexpectedJsonResponseException(json: response),
   };
 }
