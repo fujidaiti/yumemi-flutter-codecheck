@@ -111,7 +111,7 @@ final _paginatedSearchResultProvider = FutureProvider.autoDispose.family(
 
 final _totalItemCountProvider = Provider.autoDispose.family(
   (ref, SearchQuery query) {
-    final _Pagination firstPage = (page: 0, query: query);
+    final _Pagination firstPage = (page: 1, query: query);
     return ref.watch(_paginatedSearchResultProvider(firstPage)).whenData(
       (result) {
         final (totalCount, _) = result;
@@ -124,7 +124,7 @@ final _totalItemCountProvider = Provider.autoDispose.family(
 final _itemAtIndexProvider = Provider.autoDispose.family(
   (ref, ({int index, SearchQuery query}) params) {
     final _Pagination page = (
-      page: params.index ~/ _pageSizeLimit,
+      page: params.index ~/ _pageSizeLimit + 1,
       query: params.query,
     );
     return ref.watch(_paginatedSearchResultProvider(page)).whenData(
