@@ -14,7 +14,6 @@ class GitHubApiClient extends http.BaseClient {
     return _client.send(request);
   }
 
-  // TODO; エラー処理（APIのレート制限に引っかかった時など）
   Future<Map<String, dynamic>> getJson({
     required String endpoint,
     Map<String, String>? queryParameters,

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yumemi_flutter_codecheck/resources/github/api/search/search_repositories.dart';
 
 void main() {
-  group("parseItem", () {
+  group("parseResponse", () {
     test(
       '正しいフォーマットのデータをパースできる',
       () {
@@ -14,18 +14,28 @@ void main() {
         const ownerName = "flutter";
         const ownerAvatarUrl = "http";
 
-        final input = {
-          "name": repoName,
-          "description": repoDescription,
-          "language": language,
-          "stargazers_count": stars,
-          "owner": {
-            "login": ownerName,
-            "avatar_url": ownerAvatarUrl,
-          },
+        final response = {
+          "total_count": 1,
+          "items": [
+            {
+              "name": repoName,
+              "description": repoDescription,
+              "language": language,
+              "stargazers_count": stars,
+              "owner": {
+                "login": ownerName,
+                "avatar_url": ownerAvatarUrl,
+              },
+            }
+          ],
         };
 
-        RepositoryOverview expected = (
+        final (:totalCount, :items) = parseResponse(response);
+
+        expect(totalCount, 1);
+        expect(items.length, 1);
+
+        RepositoryOverview expectedItem = (
           name: repoName,
           description: repoDescription,
           language: language,
@@ -34,7 +44,7 @@ void main() {
           avatarUrl: ownerAvatarUrl,
         );
 
-        expect(parseItem(input), expected);
+        expect(items.first, expectedItem);
       },
     );
   });

@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:yumemi_flutter_codecheck/resources/github/client.dart';
+import 'package:yumemi_flutter_codecheck/resources/github/exceptions.dart';
 
 // ドキュメント ↓
 // https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-issues-and-pull-requests
@@ -30,7 +31,6 @@ typedef SearchPullRequestsResult = ({
 SearchPullRequestsResult parseResponse(Map<String, dynamic> response) {
   return switch (response) {
     {"total_count": int totalCount} => (totalCount: totalCount),
-    // TODO; 例外処理
-    _ => throw UnimplementedError("Unkown format: $response"),
+    _ => throw UnexpectedJsonResponseException(json: response),
   };
 }
