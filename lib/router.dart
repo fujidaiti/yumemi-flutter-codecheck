@@ -20,6 +20,7 @@ final router = GoRouter(
       builder: (context, state) {
         return switch (state.extra) {
           SearchQuery query => Search(query: query),
+          // TODO; ディープリンクに対応させる
           _ => throw ArgumentError("'/search'はディープリンクに未対応"),
         };
       },
