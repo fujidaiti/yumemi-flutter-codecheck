@@ -6,10 +6,13 @@
 
 ## 成果物
 
-デプロイ先：https://fujidaiti.github.io/yumemi-flutter-codecheck/#/
+#### デプロイ先
 
-<動作動画>
+https://fujidaiti.github.io/yumemi-flutter-codecheck/#/
 
+#### デモ動画
+
+![demo](contents/demo.mov)
 
 
 ## 実行
