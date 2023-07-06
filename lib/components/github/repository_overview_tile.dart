@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 
+const _minTileHeight = 160.0;
+
 typedef OnTapRepositoryOverviewTileCallback = void Function(
   RepositoryOverview rpeo,
 );
@@ -33,12 +35,17 @@ class RepositoryOverviewTile extends StatelessWidget {
           (var callback?, var data?) => () => callback(data.value),
           _ => null,
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 12,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minHeight: _minTileHeight,
           ),
-          child: body,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 12,
+            ),
+            child: body,
+          ),
         ),
       ),
     );
@@ -72,12 +79,14 @@ class RepositoryOverviewTile extends StatelessWidget {
     return UnkownErrorWidget(
       error,
       stackTrace,
-      child: ListTile(
-        leading: Icon(
-          OctIcons.alert_24,
-          color: Theme.of(context).colorScheme.error,
+      child: Center(
+        child: ListTile(
+          leading: Icon(
+            OctIcons.alert_24,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          title: const Text("Failed to load..."),
         ),
-        title: const Text("Failed to load..."),
       ),
     );
   }
