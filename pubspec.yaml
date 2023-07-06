@@ -32,6 +32,10 @@ dependencies:
   # フェイクデータ
   faker: ^2.1.0
 
+  # ログ
+  logging: ^1.2.0
+  stack_trace: ^1.11.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
