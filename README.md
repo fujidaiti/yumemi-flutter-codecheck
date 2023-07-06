@@ -12,7 +12,7 @@ https://fujidaiti.github.io/yumemi-flutter-codecheck/#/
 
 #### デモ動画
 
-![demo](contents/demo.mov)
+<img src="contents/demo.mov" width="260"/>
 
 
 ## 実行
