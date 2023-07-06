@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:yumemi_flutter_codecheck/components/common/search_box.dart';
-import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
+import 'package:yumemi_flutter_codecheck/screens/incremental_search.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -11,15 +9,20 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
-        child: SearchBox(
-          onSubmitted: (text) {
-            final trimmed = text.trim();
-            if (trimmed.isNotEmpty) {
-              final query = SearchQuery(keywords: trimmed);
-              context.push("/search", extra: query);
-            }
-          },
-        ),
+        child: TextButton(
+            onPressed: () {
+              IncrementalSearch.show(context);
+            },
+            child: Text("search")),
+        // child: SearchBox(
+        //   onSubmitted: (text) {
+        //     final trimmed = text.trim();
+        //     if (trimmed.isNotEmpty) {
+        //       final query = SearchQuery(keywords: trimmed);
+        //       context.push("/search", extra: query);
+        //     }
+        //   },
+        // ),
       ),
     );
   }
