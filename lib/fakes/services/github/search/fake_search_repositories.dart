@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/fakes/services/github/faker.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
@@ -7,7 +9,7 @@ final fakeRepositoriesProvider = FutureProvider.autoDispose.family(
   (ref, RepositoriesProviderParams params) async {
     final totalCount = faker.randomGenerator.integer(100);
     final items = List.generate(
-      totalCount,
+      min(totalCount, params.perPage),
       (_) {
         return RepositoryOverview(
           name: faker.lorem.word(),
