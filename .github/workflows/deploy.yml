@@ -24,7 +24,6 @@ jobs:
         run: flutter pub get
         
       - name: Build runner
-        working-directory: ${{ env.package_dir }}
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
       - name: Build web app
