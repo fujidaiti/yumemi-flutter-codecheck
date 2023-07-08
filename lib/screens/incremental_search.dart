@@ -43,6 +43,7 @@ class IncrementalSearch extends HookWidget {
           initialText: query.value.keywords,
           onSubmitted: onKeywordsSubmitted,
           onTextChanged: onKeywordsChanged,
+          autoFocus: true,
         ),
       ),
       body: ValueListenableBuilder(

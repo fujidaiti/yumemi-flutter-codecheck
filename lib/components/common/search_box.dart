@@ -8,11 +8,13 @@ class SearchBox extends HookWidget {
     this.initialText,
     this.onSubmitted,
     this.onTextChanged,
+    this.autoFocus = true,
   });
 
   final String? initialText;
   final void Function(String text)? onSubmitted;
   final void Function(String text)? onTextChanged;
+  final bool autoFocus;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,14 @@ class SearchBox extends HookWidget {
       false => null,
     };
 
+    final textFiled = TextField(
+      onChanged: onTextChanged,
+      onSubmitted: onSubmitted,
+      controller: controller,
+      autofocus: autoFocus,
+      textInputAction: TextInputAction.search,
+    );
+
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: const ShapeDecoration(
@@ -67,11 +77,7 @@ class SearchBox extends HookWidget {
             Expanded(
               child: Focus(
                 onFocusChange: onFocusChanged,
-                child: TextField(
-                  onChanged: onTextChanged,
-                  onSubmitted: onSubmitted,
-                  controller: controller,
-                ),
+                child: textFiled,
               ),
             ),
             if (clearButton != null) clearButton,

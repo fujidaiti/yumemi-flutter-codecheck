@@ -35,6 +35,7 @@ class Search extends HookWidget {
         title: SearchBox(
           initialText: query.value.keywords,
           onSubmitted: onNewKeywordsSubmitted,
+          autoFocus: false,
         ),
       ),
       body: RepositoryOverviewList(
