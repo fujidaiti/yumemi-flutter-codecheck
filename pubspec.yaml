@@ -10,11 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # UI
+  flutter_octicons: ^0.37.0
+  primer_progress_bar: ^0.2.1
+
   # ネットワーク
   http: ^1.1.0
-
-  # システムアイコン
-  flutter_octicons: ^0.37.0
 
   # ルーティング
   go_router: ^9.0.0
