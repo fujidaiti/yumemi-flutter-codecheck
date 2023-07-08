@@ -19,6 +19,7 @@ class SearchBox extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController(text: initialText);
+    final focusNode = useFocusNode();
     final hasFocus = useState(false);
     final hasText = useState(initialText?.isNotEmpty == true);
 
@@ -34,6 +35,15 @@ class SearchBox extends HookWidget {
     void onTextChanged(String text) {
       hasText.value = text.isNotEmpty;
       this.onTextChanged?.call(text);
+    }
+
+    void onSubmitted(String text) {
+      if (text.isNotEmpty) {
+        this.onSubmitted?.call(text);
+      } else {
+        // 何も入力されていない場合はキーボードを閉じない
+        focusNode.requestFocus();
+      }
     }
 
     void onBackButtonPressed() => Navigator.of(context).pop();
@@ -61,6 +71,7 @@ class SearchBox extends HookWidget {
       controller: controller,
       autofocus: autoFocus,
       textInputAction: TextInputAction.search,
+      focusNode: focusNode,
     );
 
     return Container(
