@@ -6,12 +6,14 @@ class SearchBox extends HookWidget {
   const SearchBox({
     super.key,
     this.initialText,
+    this.hintText,
     this.onSubmitted,
     this.onTextChanged,
     this.autoFocus = true,
   });
 
   final String? initialText;
+  final String? hintText;
   final void Function(String text)? onSubmitted;
   final void Function(String text)? onTextChanged;
   final bool autoFocus;
@@ -20,20 +22,14 @@ class SearchBox extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController(text: initialText);
     final focusNode = useFocusNode();
-    final hasFocus = useState(false);
-    final hasText = useState(initialText?.isNotEmpty == true);
+    final text = useListenable(controller).text;
+    final hasFocus = useListenable(focusNode).hasFocus;
 
-    void clearText() {
+    void onClearButtonPressed() {
       controller.text = "";
-      hasText.value = false;
-    }
-
-    void onFocusChanged(bool value) {
-      hasFocus.value = value;
     }
 
     void onTextChanged(String text) {
-      hasText.value = text.isNotEmpty;
       this.onTextChanged?.call(text);
     }
 
@@ -46,7 +42,9 @@ class SearchBox extends HookWidget {
       }
     }
 
-    void onBackButtonPressed() => Navigator.of(context).pop();
+    void onBackButtonPressed() {
+      Navigator.of(context).pop();
+    }
 
     final canPop = ModalRoute.of(context)?.canPop ?? false;
     final leadingIcon = switch (canPop) {
@@ -57,9 +55,9 @@ class SearchBox extends HookWidget {
       false => const Icon(OctIcons.search_24),
     };
 
-    final clearButton = switch (hasFocus.value && hasText.value) {
+    final clearButton = switch (hasFocus && text.isNotEmpty) {
       true => IconButton(
-          onPressed: clearText,
+          onPressed: onClearButtonPressed,
           icon: const Icon(OctIcons.x_16),
         ),
       false => null,
@@ -72,6 +70,10 @@ class SearchBox extends HookWidget {
       autofocus: autoFocus,
       textInputAction: TextInputAction.search,
       focusNode: focusNode,
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: InputBorder.none,
+      ),
     );
 
     return Container(
@@ -85,12 +87,7 @@ class SearchBox extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             leadingIcon,
-            Expanded(
-              child: Focus(
-                onFocusChange: onFocusChanged,
-                child: textFiled,
-              ),
-            ),
+            Expanded(child: textFiled),
             if (clearButton != null) clearButton,
           ],
         ),
