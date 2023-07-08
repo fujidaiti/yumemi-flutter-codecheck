@@ -9,14 +9,19 @@ class SearchBox extends HookWidget {
     this.hintText,
     this.onSubmitted,
     this.onTextChanged,
+    this.onTap,
     this.autoFocus = true,
+    this.readOnly = false,
   });
 
   final String? initialText;
   final String? hintText;
   final void Function(String text)? onSubmitted;
   final void Function(String text)? onTextChanged;
+  final VoidCallback? onTap;
   final bool autoFocus;
+  final bool readOnly;
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +74,9 @@ class SearchBox extends HookWidget {
     final textFiled = TextField(
       onChanged: onTextChanged,
       onSubmitted: onSubmitted,
+      onTap: onTap,
       controller: controller,
+      readOnly: readOnly,
       autofocus: autoFocus,
       textInputAction: TextInputAction.search,
       focusNode: focusNode,

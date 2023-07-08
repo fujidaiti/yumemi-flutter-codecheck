@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yumemi_flutter_codecheck/components/common/search_box.dart';
 import 'package:yumemi_flutter_codecheck/screens/incremental_search.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
@@ -10,24 +11,17 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
-        child: TextButton(
-          onPressed: () {
+        child: SearchBox(
+          autoFocus: false,
+          readOnly: true,
+          onTap: () {
             IncrementalSearch.showAsDialog(
               context,
               const SearchQuery(keywords: ""),
             );
           },
-          child: const Text("search"),
+          hintText: "Search repositories",
         ),
-        // child: SearchBox(
-        //   onSubmitted: (text) {
-        //     final trimmed = text.trim();
-        //     if (trimmed.isNotEmpty) {
-        //       final query = SearchQuery(keywords: trimmed);
-        //       context.push("/search", extra: query);
-        //     }
-        //   },
-        // ),
       ),
     );
   }
