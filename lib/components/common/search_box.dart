@@ -51,6 +51,7 @@ class SearchBox extends HookWidget {
       true => IconButton(
           onPressed: onBackButtonPressed,
           icon: const Icon(Icons.arrow_back),
+          tooltip: "Back",
         ),
       false => const Icon(OctIcons.search_24),
     };
@@ -59,6 +60,7 @@ class SearchBox extends HookWidget {
       true => IconButton(
           onPressed: onClearButtonPressed,
           icon: const Icon(OctIcons.x_16),
+          tooltip: "Clear field",
         ),
       false => null,
     };
