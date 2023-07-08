@@ -23,7 +23,10 @@ class Search extends HookWidget {
     }
 
     void onTapSearchBar() async {
-      final newQuery = await IncrementalSearch.showAsDialog(context, query);
+      final newQuery = await IncrementalSearch.showAsDialog(
+        context: context,
+        initialQuery: query,
+      );
       if (newQuery != null && context.mounted) {
         context.push("/search", extra: newQuery);
       }

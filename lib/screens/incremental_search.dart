@@ -55,14 +55,16 @@ class IncrementalSearch extends HookWidget {
     );
   }
 
-  static Future<SearchQuery?> showAsDialog(
-      BuildContext context, SearchQuery query) {
+  static Future<SearchQuery?> showAsDialog({
+    required BuildContext context,
+    required SearchQuery initialQuery,
+  }) {
     return Navigator.of(context).push(
       MaterialPageRoute(
         fullscreenDialog: true,
         builder: (context) {
           return IncrementalSearch(
-            initialQuery: query,
+            initialQuery: initialQuery,
           );
         },
       ),

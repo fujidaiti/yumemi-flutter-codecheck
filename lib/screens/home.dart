@@ -11,8 +11,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     void onTapSearchBar() async {
       final query = await IncrementalSearch.showAsDialog(
-        context,
-        const SearchQuery(keywords: ""),
+        context: context,
+        initialQuery: const SearchQuery(keywords: ""),
       );
       if (query != null && context.mounted) {
         context.push("/search", extra: query);
