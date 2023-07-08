@@ -27,6 +27,7 @@ class SearchBox extends HookWidget {
 
     void onClearButtonPressed() {
       controller.text = "";
+      this.onTextChanged?.call("");
     }
 
     void onTextChanged(String text) {
