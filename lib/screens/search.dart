@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/common/search_box.dart';
 import 'package:yumemi_flutter_codecheck/components/github/repository_overview_list.dart';
+import 'package:yumemi_flutter_codecheck/screens/incremental_search.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
@@ -17,29 +18,28 @@ class Search extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final query = useState(this.query);
-
-    void onNewKeywordsSubmitted(String keywords) {
-      query.value = SearchQuery(
-        keywords: keywords.trim(),
-      );
-    }
-
     void onTapItem(RepositoryOverview repo) {
       context.push("/repository/${repo.owner}/${repo.name}");
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: SearchBox(
-          initialText: query.value.keywords,
-          onSubmitted: onNewKeywordsSubmitted,
-          autoFocus: false,
-        ),
+    void onTapSearchBar() {
+      IncrementalSearch.showAsDialog(context, query);
+    }
+
+    final searchBar = AppBar(
+      automaticallyImplyLeading: false,
+      title: SearchBox(
+        initialText: query.keywords,
+        autoFocus: false,
+        readOnly: true,
+        onTap: onTapSearchBar,
       ),
+    );
+
+    return Scaffold(
+      appBar: searchBar,
       body: RepositoryOverviewList(
-        query: query.value,
+        query: query,
         onTapItem: onTapItem,
         loadingBuilder: (context) =>
             const Center(child: CircularProgressIndicator()),
