@@ -22,7 +22,6 @@ class SearchBox extends HookWidget {
   final bool autoFocus;
   final bool readOnly;
 
-
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController(text: initialText);
@@ -62,7 +61,8 @@ class SearchBox extends HookWidget {
       false => const Icon(OctIcons.search_24),
     };
 
-    final clearButton = switch (hasFocus && text.isNotEmpty) {
+    bool showClearButton = !readOnly && hasFocus && text.isNotEmpty;
+    final clearButton = switch (showClearButton) {
       true => IconButton(
           onPressed: onClearButtonPressed,
           icon: const Icon(OctIcons.x_16),
