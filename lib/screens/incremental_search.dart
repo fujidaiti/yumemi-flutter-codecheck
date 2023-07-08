@@ -28,10 +28,7 @@ class IncrementalSearch extends HookWidget {
 
     void onKeywordsSubmitted(String _) {
       if (query.value.keywords.isNotEmpty) {
-        context
-            .push("/search", extra: query.value)
-            // 検索画面と一緒にこの画面もpopする
-            .then((_) => Navigator.of(context).pop());
+        context.pop(query.value);
       }
     }
 
@@ -58,8 +55,9 @@ class IncrementalSearch extends HookWidget {
     );
   }
 
-  static void showAsDialog(BuildContext context, SearchQuery query) {
-    Navigator.of(context).push(
+  static Future<SearchQuery?> showAsDialog(
+      BuildContext context, SearchQuery query) {
+    return Navigator.of(context).push(
       MaterialPageRoute(
         fullscreenDialog: true,
         builder: (context) {

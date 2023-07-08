@@ -22,8 +22,11 @@ class Search extends HookWidget {
       context.push("/repository/${repo.owner}/${repo.name}");
     }
 
-    void onTapSearchBar() {
-      IncrementalSearch.showAsDialog(context, query);
+    void onTapSearchBar() async {
+      final newQuery = await IncrementalSearch.showAsDialog(context, query);
+      if (newQuery != null && context.mounted) {
+        context.push("/search", extra: newQuery);
+      }
     }
 
     final searchBar = AppBar(
