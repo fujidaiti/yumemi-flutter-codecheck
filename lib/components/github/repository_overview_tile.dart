@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:github_language_colors/github_language_colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/common/avatar_icon.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
@@ -83,7 +84,7 @@ class RepositoryOverviewTile extends StatelessWidget {
     };
 
     final stars = Chip(
-      label: Text("${repo.stars}"),
+      label: Text(NumberFormat.compact().format(repo.stars)),
       avatar: const Icon(OctIcons.star_16),
       visualDensity: VisualDensity.compact,
     );

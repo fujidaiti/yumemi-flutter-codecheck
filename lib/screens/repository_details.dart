@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:primer_progress_bar/primer_progress_bar.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/common/avatar_icon.dart';
@@ -54,6 +55,9 @@ class RepositoryDetails extends ConsumerWidget {
 
     final textTheme = Theme.of(context).textTheme;
 
+    // "2000"を"2k"のように変換するフォーマッター
+    final counterFormatter = NumberFormat.compact();
+
     final header = ListTile(
       onTap: onTapHeader,
       leading: AvatarIcon(url: repository.avatarUrl),
@@ -94,35 +98,35 @@ class RepositoryDetails extends ConsumerWidget {
     final stars = _buildStatusTile(
       context: context,
       title: "Stars",
-      counter: repository.stargazersCount,
+      counter: counterFormatter.format(repository.stargazersCount),
       icon: const Icon(OctIcons.star_24),
     );
 
     final forks = _buildStatusTile(
       context: context,
       title: "Forks",
-      counter: repository.forksCount,
+      counter: counterFormatter.format(repository.forksCount),
       icon: const Icon(OctIcons.repo_forked_24),
     );
 
     final watchers = _buildStatusTile(
       context: context,
       title: "Watchers",
-      counter: repository.watchersCount,
+      counter: counterFormatter.format(repository.watchersCount),
       icon: const Icon(OctIcons.eye_24),
     );
 
     final issues = _buildStatusTile(
       context: context,
       title: "Issues",
-      counter: repository.openIssuesCount,
+      counter: counterFormatter.format(repository.openIssuesCount),
       icon: const Icon(OctIcons.issue_opened_24),
     );
 
     final pullRequests = _buildStatusTile(
       context: context,
       title: "Pull Requests",
-      counter: repository.openPullRequestsCount,
+      counter: counterFormatter.format(repository.openPullRequestsCount),
       icon: const Icon(OctIcons.git_pull_request_24),
     );
 
@@ -169,15 +173,15 @@ class RepositoryDetails extends ConsumerWidget {
   Widget _buildStatusTile({
     required BuildContext context,
     required String title,
-    required int counter,
+    required String counter,
     required Icon icon,
   }) {
     return ListTile(
       title: Text(title),
       leading: icon,
       trailing: Text(
-        "$counter",
-        style: Theme.of(context).textTheme.labelLarge,
+        counter,
+        style: Theme.of(context).textTheme.labelLarge!,
       ),
     );
   }
