@@ -76,7 +76,7 @@ final _incrementalSearchResult = FutureProvider.autoDispose.family(
   (ref, SearchQuery query) async {
     // 最初の`maxItemCount`件だけ取得する
     const maxItemCount = 6;
-    const debounceDuration = Duration(milliseconds: 500);
+    const debounceDuration = Duration(milliseconds: 850);
 
     if (query.keywords.isEmpty) {
       return const <RepositoryOverview>[];
