@@ -41,24 +41,38 @@ class RepositoryDetails extends ConsumerWidget {
   }
 
   Widget _buildBody(BuildContext context, Repository repository) {
-    final repoName = Text(
-      repository.name,
-      style: Theme.of(context).textTheme.titleLarge,
-    );
-
-    final avatar = AvatarIcon(url: repository.avatarUrl);
+    final textTheme = Theme.of(context).textTheme;
 
     final header = ListTile(
-      leading: avatar,
-      title: repoName,
-      subtitle: Text("${repository.owner}/"),
+      leading: AvatarIcon(url: repository.avatarUrl),
+      title: Text(
+        repository.owner,
+        style: textTheme.bodyLarge?.apply(
+          color: textTheme.bodyLarge?.color?.withOpacity(0.8),
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      contentPadding: EdgeInsets.zero,
+      visualDensity: VisualDensity.compact,
+    );
+
+    final name = Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Text(
+        repository.name,
+        style: Theme.of(context).textTheme.displaySmall,
+      ),
     );
 
     final description = switch (repository.description) {
       null => null,
-      final text => Text(
-          text,
-          style: Theme.of(context).textTheme.bodyMedium,
+      final text => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
         ),
     };
 
@@ -98,6 +112,7 @@ class RepositoryDetails extends ConsumerWidget {
     );
 
     final languages = ListTile(
+      contentPadding: EdgeInsets.zero,
       leading: const Icon(OctIcons.package_24),
       titleAlignment: ListTileTitleAlignment.top,
       title: const Text("Languages"),
@@ -118,17 +133,25 @@ class RepositoryDetails extends ConsumerWidget {
     );
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          header,
-          if (description != null) description,
-          stars,
-          forks,
-          watchers,
-          issues,
-          pullRequests,
-          languages,
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 24,
+          bottom: 24,
+        ),
+        child: Column(
+          children: [
+            header,
+            name,
+            if (description != null) description,
+            stars,
+            forks,
+            watchers,
+            issues,
+            pullRequests,
+            languages,
+          ],
+        ),
       ),
     );
   }
@@ -146,6 +169,7 @@ class RepositoryDetails extends ConsumerWidget {
         "$counter",
         style: Theme.of(context).textTheme.labelLarge,
       ),
+      contentPadding: EdgeInsets.zero,
     );
   }
 
