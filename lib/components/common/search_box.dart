@@ -58,7 +58,10 @@ class SearchBox extends HookWidget {
           icon: const Icon(Icons.arrow_back),
           tooltip: "Back",
         ),
-      false => const Icon(OctIcons.search_24),
+      false => const SizedBox.square(
+          dimension: 48,
+          child: Icon(OctIcons.search_24),
+        ),
     };
 
     bool showClearButton = !readOnly && hasFocus && text.isNotEmpty;
@@ -93,13 +96,18 @@ class SearchBox extends HookWidget {
       ),
       child: Material(
         color: Theme.of(context).colorScheme.surfaceVariant,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            leadingIcon,
-            Expanded(child: textFiled),
-            if (clearButton != null) clearButton,
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              leadingIcon,
+              Expanded(child: textFiled),
+              if (clearButton != null) clearButton,
+            ],
+          ),
         ),
       ),
     );
