@@ -17,11 +17,13 @@ final router = GoRouter(
     ),
     GoRoute(
       path: "/search",
+      name: "search",
       builder: (context, state) {
-        return switch (state.extra) {
-          SearchQuery query => Search(query: query),
-          // TODO; ディープリンクに対応させる
-          _ => throw ArgumentError("'/search'はディープリンクに未対応"),
+        return switch (state.queryParameters) {
+          {"q": String keywords} => Search(
+              query: SearchQuery(keywords: keywords),
+            ),
+          _ => const NotFound(),
         };
       },
     ),
