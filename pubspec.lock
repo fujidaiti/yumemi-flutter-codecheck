@@ -272,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  github_language_colors:
+    dependency: "direct main"
+    description:
+      name: github_language_colors
+      sha256: "63b833709a35ea3726e56f3ce7421a99b402918b3a7043e66c1e285e4700703c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   glob:
     dependency: transitive
     description:
@@ -284,10 +292,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "1531542666c2d052c44bbf6e2b48011bf3771da0404b94c60eabec1228a62906"
+      sha256: b33a88c67816312597e5e0f5906c5139a0b9bd9bb137346e872c788da7af8ea0
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.3"
   graphs:
     dependency: transitive
     description:

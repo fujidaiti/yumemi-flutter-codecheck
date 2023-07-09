@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:primer_progress_bar/primer_progress_bar.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/common/avatar_icon.dart';
+import 'package:yumemi_flutter_codecheck/components/github/repository_languages_chart.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/get_repository.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/types/repository.dart';
 
@@ -95,13 +97,25 @@ class RepositoryDetails extends ConsumerWidget {
       icon: const Icon(OctIcons.git_pull_request_24),
     );
 
-    final language = switch (repository.language) {
-      null => null,
-      final lang => ListTile(
-          leading: const Icon(OctIcons.code_24),
-          title: Text(lang),
+    final languages = ListTile(
+      leading: const Icon(OctIcons.package_24),
+      titleAlignment: ListTileTitleAlignment.top,
+      title: const Text("Languages"),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: RepositoryLanguagesChart(
+          languages: repository.languages,
+          legendStyle: const SegmentedBarLegendStyle(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+            maxLines: 3,
+          ),
+          barStyle: const SegmentedBarStyle(
+            gap: 2,
+            padding: EdgeInsets.all(6),
+          ),
         ),
-    };
+      ),
+    );
 
     return SingleChildScrollView(
       child: Column(
@@ -113,7 +127,7 @@ class RepositoryDetails extends ConsumerWidget {
           watchers,
           issues,
           pullRequests,
-          if (language != null) language,
+          languages,
         ],
       ),
     );
@@ -130,7 +144,7 @@ class RepositoryDetails extends ConsumerWidget {
       leading: icon,
       trailing: Text(
         "$counter",
-        style: Theme.of(context).textTheme.labelMedium,
+        style: Theme.of(context).textTheme.labelLarge,
       ),
     );
   }
