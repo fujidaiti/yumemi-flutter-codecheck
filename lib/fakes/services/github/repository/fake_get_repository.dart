@@ -20,6 +20,7 @@ final fakeRepositoryProvider = FutureProvider.autoDispose.family(
       openIssuesCount: faker.randomGenerator.integer(200),
       openPullRequestsCount: faker.randomGenerator.integer(200),
       languages: {
+        // TODO; 合計が100%になるようにする
         for (var i = 0; i < faker.randomGenerator.integer(7); ++i)
           faker.randomGenerator.element(githubLanguageColors.keys.toList()):
               Percentage(faker.randomGenerator.decimal(scale: 30.0, min: 0.1)),
