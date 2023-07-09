@@ -50,7 +50,12 @@ class RepositoryDetails extends ConsumerWidget {
     void onTapHeader() {
       // ユーザーのリポジトリ一覧へ飛ぶ
       final query = SearchQuery(keywords: "user:${repository.owner}");
-      context.push("/search", extra: query);
+      context.pushNamed(
+        "search",
+        queryParameters: {
+          "q": query.keywords,
+        },
+      );
     }
 
     final textTheme = Theme.of(context).textTheme;

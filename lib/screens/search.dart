@@ -29,7 +29,12 @@ class Search extends HookWidget {
         initialQuery: query,
       );
       if (newQuery != null && context.mounted) {
-        context.push("/search", extra: newQuery);
+        context.pushNamed(
+          "search",
+          queryParameters: {
+            "q": newQuery.keywords,
+          },
+        );
       }
     }
 

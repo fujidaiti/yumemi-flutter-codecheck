@@ -16,7 +16,12 @@ class Home extends StatelessWidget {
         initialQuery: const SearchQuery(keywords: ""),
       );
       if (query != null && context.mounted) {
-        context.push("/search", extra: query);
+        context.pushNamed(
+          "search",
+          queryParameters: {
+            "q": query.keywords,
+          },
+        );
       }
     }
 
