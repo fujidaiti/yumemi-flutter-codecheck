@@ -9,6 +9,7 @@ import 'package:yumemi_flutter_codecheck/services/github/search/types/repository
 
 const _minTileHeight = 140.0;
 const _fallbackLanguageColor = Colors.lightGreen;
+const _loadErrorMessage = "Failed to load...";
 
 typedef OnTapRepositoryOverviewTileCallback = void Function(
   RepositoryOverview rpeo,
@@ -145,7 +146,7 @@ class RepositoryOverviewTile extends StatelessWidget {
             OctIcons.alert_24,
             color: Theme.of(context).colorScheme.error,
           ),
-          title: const Text("Failed to load..."),
+          title: const Text(_loadErrorMessage),
         ),
       ),
     );
