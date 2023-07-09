@@ -141,12 +141,20 @@ class _SearchResultList extends ConsumerWidget {
 
     final textTheme = Theme.of(context).textTheme;
 
-    final header = ListTile(
-      title: const Text("Top hits"),
-      titleTextStyle: textTheme.labelLarge,
-      trailing: TextButton(
-        onPressed: onTapSeeAllButton,
-        child: const Text("See all"),
+    final header = Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 4),
+      child: Row(
+        children: [
+          Text(
+            "Top hits",
+            style: textTheme.labelLarge,
+          ),
+          const Spacer(),
+          TextButton(
+            onPressed: onTapSeeAllButton,
+            child: const Text("See all"),
+          ),
+        ],
       ),
     );
 
