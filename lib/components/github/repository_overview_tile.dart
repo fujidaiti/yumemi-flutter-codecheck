@@ -80,6 +80,8 @@ class RepositoryOverviewTile extends StatelessWidget {
       String text when text.isNotEmpty => Text(
           text,
           style: Theme.of(context).textTheme.bodyLarge,
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
         ),
       _ => const SizedBox(height: 20),
     };
