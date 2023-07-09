@@ -92,7 +92,7 @@ class RepositoryDetails extends ConsumerWidget {
       context: context,
       title: "Stars",
       counter: repository.stargazersCount,
-      icon: const Icon(OctIcons.star_fill_24),
+      icon: const Icon(OctIcons.star_24),
     );
 
     final forks = _buildStatusTile(
