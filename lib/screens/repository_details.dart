@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:primer_progress_bar/primer_progress_bar.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
@@ -7,6 +8,7 @@ import 'package:yumemi_flutter_codecheck/components/common/avatar_icon.dart';
 import 'package:yumemi_flutter_codecheck/components/github/repository_languages_chart.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/get_repository.dart';
 import 'package:yumemi_flutter_codecheck/services/github/repository/types/repository.dart';
+import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
 
 class RepositoryDetails extends ConsumerWidget {
   const RepositoryDetails({
@@ -50,6 +52,7 @@ class RepositoryDetails extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final header = ListTile(
+      onTap: onTapHeader,
       leading: AvatarIcon(url: repository.avatarUrl),
       title: Text(
         repository.owner,
@@ -59,12 +62,11 @@ class RepositoryDetails extends ConsumerWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity.compact,
     );
 
     final name = Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.fromLTRB(16, 12, 24, 12),
       child: Text(
         repository.name,
         style: textTheme.displaySmall,
@@ -74,7 +76,7 @@ class RepositoryDetails extends ConsumerWidget {
     final description = switch (repository.description) {
       null => null,
       final text => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 24, 12),
           child: Text(
             text,
             style: textTheme.bodyLarge,
@@ -122,7 +124,6 @@ class RepositoryDetails extends ConsumerWidget {
     );
 
     final languages = ListTile(
-      contentPadding: EdgeInsets.zero,
       leading: const Icon(OctIcons.package_24),
       titleAlignment: ListTileTitleAlignment.top,
       title: const Text("Languages"),
@@ -143,25 +144,18 @@ class RepositoryDetails extends ConsumerWidget {
     );
 
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: 16,
-          right: 24,
-          bottom: 24,
-        ),
-        child: Column(
-          children: [
-            header,
-            name,
-            if (description != null) description,
-            stars,
-            forks,
-            watchers,
-            issues,
-            pullRequests,
-            languages,
-          ],
-        ),
+      child: Column(
+        children: [
+          header,
+          name,
+          if (description != null) description,
+          stars,
+          forks,
+          watchers,
+          issues,
+          pullRequests,
+          languages,
+        ],
       ),
     );
   }
@@ -179,7 +173,6 @@ class RepositoryDetails extends ConsumerWidget {
         "$counter",
         style: Theme.of(context).textTheme.labelLarge,
       ),
-      contentPadding: EdgeInsets.zero,
     );
   }
 
