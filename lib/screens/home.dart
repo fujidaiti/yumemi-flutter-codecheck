@@ -21,12 +21,17 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Center(
-        child: SearchBox(
-          autoFocus: false,
-          readOnly: true,
-          onTap: onTapSearchBar,
-          hintText: "Search repositories",
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: SearchBox(
+              autoFocus: false,
+              readOnly: true,
+              onTap: onTapSearchBar,
+              hintText: "Search repositories",
+            ),
+          ),
         ),
       ),
     );
