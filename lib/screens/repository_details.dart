@@ -61,7 +61,7 @@ class RepositoryDetails extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Text(
         repository.name,
-        style: Theme.of(context).textTheme.displaySmall,
+        style: textTheme.displaySmall,
       ),
     );
 
@@ -71,7 +71,7 @@ class RepositoryDetails extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Text(
             text,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: textTheme.bodyLarge,
             // たまにREADMEをdescriptionに貼り付けているリポジトリがあるため、
             // 一応行数を制限する
             maxLines: 10,
