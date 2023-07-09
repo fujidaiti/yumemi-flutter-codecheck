@@ -16,9 +16,9 @@ Future<ListRepositoryLanguagesResult> listRepositoryLanguages({
 }
 
 /// [listRepositoryLanguages]の結果を表す型（[Map]）
-/// 
+///
 /// キーは言語名、値はその言語で書かれたコードのバイト数。
-/// 
+///
 /// 例：
 /// ```json
 /// {
@@ -30,8 +30,13 @@ typedef ListRepositoryLanguagesResult = Map<String, int>;
 
 @visibleForTesting
 ListRepositoryLanguagesResult parseResponse(Map<String, dynamic> response) {
-  return switch (response) {
-    Map<String, int> languages => languages,
-    _ => throw UnexpectedJsonResponseException(json: response),
-  };
+  final ListRepositoryLanguagesResult result = {};
+  for (final MapEntry(key: language, value: bytes) in response.entries) {
+    if (bytes is int) {
+      result[language] = bytes;
+    } else {
+      throw UnexpectedJsonResponseException(json: response);
+    }
+  }
+  return result;
 }
