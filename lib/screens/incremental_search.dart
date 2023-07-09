@@ -92,7 +92,8 @@ final _topHitItemsProvider = FutureProvider.autoDispose.family(
   (ref, SearchQuery query) async {
     // 最初の`maxItemCount`件だけ取得する
     const maxItemCount = 6;
-    const debounceDuration = Duration(milliseconds: 850);
+    // 認証していないとすぐにレート制限に引っかかるので少し長めに取る
+    const debounceDuration = Duration(milliseconds: 500);
 
     if (query.keywords.isEmpty) {
       return const <RepositoryOverview>[];
