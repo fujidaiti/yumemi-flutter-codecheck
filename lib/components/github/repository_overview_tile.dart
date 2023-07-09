@@ -16,16 +16,16 @@ typedef OnTapRepositoryOverviewTileCallback = void Function(
 class RepositoryOverviewTile extends StatelessWidget {
   const RepositoryOverviewTile({
     super.key,
-    required this.overview,
+    required this.repository,
     this.onTap,
   });
 
-  final AsyncValue<RepositoryOverview> overview;
+  final AsyncValue<RepositoryOverview> repository;
   final OnTapRepositoryOverviewTileCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final body = overview.when(
+    final body = repository.when(
       data: (overview) => _build(context, overview),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => _buildError(context, error, stackTrace),
@@ -34,7 +34,7 @@ class RepositoryOverviewTile extends StatelessWidget {
     return Material(
       color: Theme.of(context).colorScheme.surface,
       child: InkWell(
-        onTap: switch ((onTap, overview.asData)) {
+        onTap: switch ((onTap, repository.asData)) {
           (var callback?, var data?) => () => callback(data.value),
           _ => null,
         },
