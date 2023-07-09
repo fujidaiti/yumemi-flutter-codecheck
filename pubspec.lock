@@ -272,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  github_language_colors:
+    dependency: "direct main"
+    description:
+      name: github_language_colors
+      sha256: "63b833709a35ea3726e56f3ce7421a99b402918b3a7043e66c1e285e4700703c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   glob:
     dependency: transitive
     description:
@@ -284,10 +292,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "1531542666c2d052c44bbf6e2b48011bf3771da0404b94c60eabec1228a62906"
+      sha256: b33a88c67816312597e5e0f5906c5139a0b9bd9bb137346e872c788da7af8ea0
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.3"
   graphs:
     dependency: transitive
     description:
@@ -328,6 +336,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   io:
     dependency: transitive
     description:
@@ -424,6 +440,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  primer_progress_bar:
+    dependency: "direct main"
+    description:
+      name: primer_progress_bar
+      sha256: c299880866ee64367f196a3a728b5cab294eb166a257d3206588b8d2bcba0d9e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   pub_semver:
     dependency: transitive
     description:

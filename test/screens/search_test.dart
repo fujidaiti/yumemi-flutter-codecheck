@@ -91,12 +91,12 @@ final _testRepositoryProvider = FutureProvider.autoDispose.family(
         owner: "flutter",
         avatarUrl: null,
         description: null,
-        language: null,
         stargazersCount: 0,
         watchersCount: 0,
         forksCount: 0,
         openIssuesCount: 0,
         openPullRequestsCount: 0,
+        languages: {},
       ),
     );
   },

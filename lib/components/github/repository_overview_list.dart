@@ -65,7 +65,7 @@ class _ListItemTile extends ConsumerWidget {
     final item = ref.watch(
       _itemAtIndexProvider((index: index, query: query)),
     );
-    return RepositoryOverviewTile(overview: item, onTap: onTap);
+    return RepositoryOverviewTile(repository: item, onTap: onTap);
   }
 }
 

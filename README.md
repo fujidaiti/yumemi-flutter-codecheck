@@ -72,3 +72,6 @@ flutter analyze
 flutter test
 ```
 
+## クレジット
+
+GitHubのロゴは[Primer/Octvisuals](https://primer.style/design/foundations/icons/octovisuals)から取得しました。

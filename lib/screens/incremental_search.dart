@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/types/request_aborted_exception.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/common/search_box.dart';
+import 'package:yumemi_flutter_codecheck/config/colors.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
@@ -32,25 +33,48 @@ class IncrementalSearch extends HookWidget {
       }
     }
 
-    final searchBar = SearchBox(
-      initialText: query.value.keywords,
-      hintText: "Search repositories",
-      onSubmitted: onKeywordsSubmitted,
-      onTextChanged: onKeywordsChanged,
-      autoFocus: true,
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = colorScheme.surfaceVariant;
+
+    final divider = PreferredSize(
+      preferredSize: const Size.fromHeight(1),
+      child: Divider(
+        height: 1,
+        color: colorScheme.divider,
+      ),
+    );
+
+    final searchBar = AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: backgroundColor,
+      scrolledUnderElevation: 0,
+      titleSpacing: 0,
+      title: SearchBox(
+        initialText: query.value.keywords,
+        hintText: "Search repositories",
+        onSubmitted: onKeywordsSubmitted,
+        onTextChanged: onKeywordsChanged,
+        autoFocus: true,
+      ),
+      bottom: divider,
     );
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: searchBar,
-      ),
-      body: ValueListenableBuilder(
-        valueListenable: query,
-        builder: (context, query, _) {
-          return _SearchResultList(query);
-        },
+      backgroundColor: backgroundColor,
+      appBar: searchBar,
+      body: SafeArea(
+        bottom: false,
+        child: ValueListenableBuilder(
+          valueListenable: query,
+          builder: (context, query, _) {
+            if (query.keywords.isEmpty) {
+              // なにも表示しない
+              return const SizedBox.shrink();
+            } else {
+              return _SearchResultList(query);
+            }
+          },
+        ),
       ),
     );
   }
@@ -72,10 +96,11 @@ class IncrementalSearch extends HookWidget {
   }
 }
 
-final _incrementalSearchResult = FutureProvider.autoDispose.family(
+final _topHitItemsProvider = FutureProvider.autoDispose.family(
   (ref, SearchQuery query) async {
     // 最初の`maxItemCount`件だけ取得する
     const maxItemCount = 6;
+    // 認証していないとすぐにレート制限に引っかかるので少し長めに取る
     const debounceDuration = Duration(milliseconds: 500);
 
     if (query.keywords.isEmpty) {
@@ -102,19 +127,47 @@ class _SearchResultList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(_incrementalSearchResult(query)).when(
-          data: _build,
+    return ref.watch(_topHitItemsProvider(query)).when(
+          data: (items) => _build(context, items),
           error: UnkownErrorWidget.new,
           loading: _buildLoading,
         );
   }
 
-  Widget _build(List<RepositoryOverview> items) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return _SearchResultItem(items[index]);
-      },
+  Widget _build(BuildContext context, List<RepositoryOverview> items) {
+    void onTapSeeAllButton() {
+      context.pop(query);
+    }
+
+    final textTheme = Theme.of(context).textTheme;
+
+    final header = Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 4),
+      child: Row(
+        children: [
+          Text(
+            "Top hits",
+            style: textTheme.labelLarge,
+          ),
+          const Spacer(),
+          TextButton(
+            onPressed: onTapSeeAllButton,
+            child: const Text("See all"),
+          ),
+        ],
+      ),
+    );
+
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: header),
+        SliverList.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return _SearchResultItem(items[index]);
+          },
+        ),
+      ],
     );
   }
 
