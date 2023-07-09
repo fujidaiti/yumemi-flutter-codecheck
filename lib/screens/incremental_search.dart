@@ -136,7 +136,7 @@ class _SearchResultList extends ConsumerWidget {
 
   Widget _build(BuildContext context, List<RepositoryOverview> items) {
     void onTapSeeAllButton() {
-      context.push("/search", extra: query);
+      context.pop(query);
     }
 
     final textTheme = Theme.of(context).textTheme;
