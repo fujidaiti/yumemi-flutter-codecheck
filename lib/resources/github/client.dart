@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 const _mediaTyle = "application/vnd.github+json";
 const _domain = "api.github.com";
+const _header = {"accept": _mediaTyle};
 
 class GitHubApiClient {
   GitHubApiClient([
@@ -17,7 +18,7 @@ class GitHubApiClient {
     Map<String, String>? queryParameters,
   }) async {
     final url = Uri.https(_domain, endpoint, queryParameters);
-    final response = await _inner.get(url, headers: {"accept": _mediaTyle});
+    final response = await _inner.get(url, headers: _header);
     return jsonDecode(response.body);
   }
 }
