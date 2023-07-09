@@ -45,6 +45,10 @@ class IncrementalSearch extends HookWidget {
         onTextChanged: onKeywordsChanged,
         autoFocus: true,
       ),
+      bottom: const PreferredSize(
+        preferredSize: Size.fromHeight(1),
+        child: Divider(height: 1),
+      ),
     );
 
     return Scaffold(
@@ -55,7 +59,12 @@ class IncrementalSearch extends HookWidget {
         child: ValueListenableBuilder(
           valueListenable: query,
           builder: (context, query, _) {
-            return _SearchResultList(query);
+            if (query.keywords.isEmpty) {
+              // なにも表示しない
+              return const SizedBox.shrink();
+            } else {
+              return _SearchResultList(query);
+            }
           },
         ),
       ),
@@ -79,7 +88,7 @@ class IncrementalSearch extends HookWidget {
   }
 }
 
-final _incrementalSearchResult = FutureProvider.autoDispose.family(
+final _topHitItemsProvider = FutureProvider.autoDispose.family(
   (ref, SearchQuery query) async {
     // 最初の`maxItemCount`件だけ取得する
     const maxItemCount = 6;
@@ -109,19 +118,39 @@ class _SearchResultList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(_incrementalSearchResult(query)).when(
-          data: _build,
+    return ref.watch(_topHitItemsProvider(query)).when(
+          data: (items) => _build(context, items),
           error: UnkownErrorWidget.new,
           loading: _buildLoading,
         );
   }
 
-  Widget _build(List<RepositoryOverview> items) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return _SearchResultItem(items[index]);
-      },
+  Widget _build(BuildContext context, List<RepositoryOverview> items) {
+    void onTapSeeAllButton() {
+      context.push("/search", extra: query);
+    }
+
+    final textTheme = Theme.of(context).textTheme;
+
+    final header = ListTile(
+      title: const Text("Top hits"),
+      titleTextStyle: textTheme.labelLarge,
+      trailing: TextButton(
+        onPressed: onTapSeeAllButton,
+        child: const Text("See all"),
+      ),
+    );
+
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: header),
+        SliverList.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return _SearchResultItem(items[index]);
+          },
+        ),
+      ],
     );
   }
 
