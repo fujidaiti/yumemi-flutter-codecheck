@@ -42,16 +42,21 @@ class Search extends HookWidget {
       ),
     );
 
+    final body = RepositoryOverviewList(
+      query: query,
+      onTapItem: onTapItem,
+      loadingBuilder: (context) =>
+          const Center(child: CircularProgressIndicator()),
+      errorBuilder: (context, error, stackTrace) {
+        return UnkownErrorWidget(error, stackTrace);
+      },
+    );
+
     return Scaffold(
       appBar: searchBar,
-      body: RepositoryOverviewList(
-        query: query,
-        onTapItem: onTapItem,
-        loadingBuilder: (context) =>
-            const Center(child: CircularProgressIndicator()),
-        errorBuilder: (context, error, stackTrace) {
-          return UnkownErrorWidget(error, stackTrace);
-        },
+      body: SafeArea(
+        bottom: false,
+        child: body,
       ),
     );
   }

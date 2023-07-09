@@ -34,10 +34,13 @@ class RepositoryDetails extends ConsumerWidget {
       appBar: AppBar(
         leading: backButton,
       ),
-      body: repository.when(
-        data: (repo) => _buildBody(context, repo),
-        error: _buildError,
-        loading: _buildLoading,
+      body: SafeArea(
+        bottom: false,
+        child: repository.when(
+          data: (repo) => _buildBody(context, repo),
+          error: _buildError,
+          loading: _buildLoading,
+        ),
       ),
     );
   }
@@ -144,6 +147,9 @@ class RepositoryDetails extends ConsumerWidget {
     );
 
     return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewPadding.bottom,
+      ),
       child: Column(
         children: [
           header,

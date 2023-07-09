@@ -46,11 +46,14 @@ class IncrementalSearch extends HookWidget {
         automaticallyImplyLeading: false,
         title: searchBar,
       ),
-      body: ValueListenableBuilder(
-        valueListenable: query,
-        builder: (context, query, _) {
-          return _SearchResultList(query);
-        },
+      body: SafeArea(
+        bottom: false,
+        child: ValueListenableBuilder(
+          valueListenable: query,
+          builder: (context, query, _) {
+            return _SearchResultList(query);
+          },
+        ),
       ),
     );
   }
