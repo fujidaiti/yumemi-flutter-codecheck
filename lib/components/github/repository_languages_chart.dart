@@ -54,14 +54,22 @@ class RepositoryLanguagesChart extends StatelessWidget {
     );
   }
 
-  /// [value]を小数点以下１桁の文字列に変換する
+  /// [value]を小数点以下１桁のパーセント値に変換する
   ///
-  /// [value]が整数なら小数点はなし。
+  /// [value]が整数なら小数点部分はなし。
+  ///
+  /// 例：
+  /// ```dart
+  /// _formatValue(3.14) == "3.1%";
+  /// _formatValue(5.0) == "5%";
+  /// _formatValue(0.18) == "0.2%";
+  /// ```
   String _formatValue(double value) {
-    final rounded = value.round();
-    return switch (rounded == value) {
-      true => "$rounded%",
-      false => "${value.toStringAsFixed(1)}%",
-    };
+    final formatted = value.toStringAsFixed(1);
+    if (formatted.endsWith(".0")) {
+      return "${value.round()}%";
+    } else {
+      return "$formatted%";
+    }
   }
 }
