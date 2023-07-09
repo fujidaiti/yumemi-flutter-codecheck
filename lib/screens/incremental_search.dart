@@ -32,20 +32,24 @@ class IncrementalSearch extends HookWidget {
       }
     }
 
-    final searchBar = SearchBox(
-      initialText: query.value.keywords,
-      hintText: "Search repositories",
-      onSubmitted: onKeywordsSubmitted,
-      onTextChanged: onKeywordsChanged,
-      autoFocus: true,
+    final backgroundColor = Theme.of(context).colorScheme.surfaceVariant;
+
+    final searchBar = AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: backgroundColor,
+      scrolledUnderElevation: 0,
+      title: SearchBox(
+        initialText: query.value.keywords,
+        hintText: "Search repositories",
+        onSubmitted: onKeywordsSubmitted,
+        onTextChanged: onKeywordsChanged,
+        autoFocus: true,
+      ),
     );
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: searchBar,
-      ),
+      backgroundColor: backgroundColor,
+      appBar: searchBar,
       body: SafeArea(
         bottom: false,
         child: ValueListenableBuilder(
