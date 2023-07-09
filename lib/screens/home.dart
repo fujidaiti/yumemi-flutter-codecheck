@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SearchBox(
               autoFocus: false,
               readOnly: true,

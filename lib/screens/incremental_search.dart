@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/types/request_aborted_exception.dart';
 import 'package:yumemi_flutter_codecheck/common/errors/unkown_error_widget.dart';
 import 'package:yumemi_flutter_codecheck/components/common/search_box.dart';
+import 'package:yumemi_flutter_codecheck/config/colors.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/search_repositories.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/repository_overview.dart';
 import 'package:yumemi_flutter_codecheck/services/github/search/types/search_query.dart';
@@ -32,12 +33,22 @@ class IncrementalSearch extends HookWidget {
       }
     }
 
-    final backgroundColor = Theme.of(context).colorScheme.surfaceVariant;
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = colorScheme.surfaceVariant;
+
+    final divider = PreferredSize(
+      preferredSize: const Size.fromHeight(1),
+      child: Divider(
+        height: 1,
+        color: colorScheme.divider,
+      ),
+    );
 
     final searchBar = AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: backgroundColor,
       scrolledUnderElevation: 0,
+      titleSpacing: 0,
       title: SearchBox(
         initialText: query.value.keywords,
         hintText: "Search repositories",
@@ -45,10 +56,7 @@ class IncrementalSearch extends HookWidget {
         onTextChanged: onKeywordsChanged,
         autoFocus: true,
       ),
-      bottom: const PreferredSize(
-        preferredSize: Size.fromHeight(1),
-        child: Divider(height: 1),
-      ),
+      bottom: divider,
     );
 
     return Scaffold(

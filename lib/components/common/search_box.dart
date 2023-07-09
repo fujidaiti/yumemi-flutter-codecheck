@@ -74,39 +74,46 @@ class SearchBox extends HookWidget {
       false => null,
     };
 
-    final textFiled = TextField(
-      onChanged: onTextChanged,
-      onSubmitted: onSubmitted,
-      onTap: onTap,
-      controller: controller,
-      readOnly: readOnly,
-      autofocus: autoFocus,
-      textInputAction: TextInputAction.search,
-      focusNode: focusNode,
-      decoration: InputDecoration(
-        hintText: hintText,
-        border: InputBorder.none,
+    final textFiled = IgnorePointer(
+      ignoring: readOnly,
+      child: TextField(
+        onChanged: onTextChanged,
+        onSubmitted: onSubmitted,
+        controller: controller,
+        readOnly: readOnly,
+        autofocus: autoFocus,
+        textInputAction: TextInputAction.search,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: InputBorder.none,
+        ),
       ),
     );
 
-    return Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: const ShapeDecoration(
-        shape: StadiumBorder(),
-      ),
-      child: Material(
-        color: Theme.of(context).colorScheme.surfaceVariant,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 4,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              leadingIcon,
-              Expanded(child: textFiled),
-              if (clearButton != null) clearButton,
-            ],
+    const boxHeight = 56.0;
+    return SizedBox(
+      height: boxHeight,
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: const ShapeDecoration(
+          shape: StadiumBorder(),
+        ),
+        child: Material(
+          color: Theme.of(context).colorScheme.surfaceVariant,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 4, right: 16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  leadingIcon,
+                  Expanded(child: textFiled),
+                  if (clearButton != null) clearButton,
+                ],
+              ),
+            ),
           ),
         ),
       ),
