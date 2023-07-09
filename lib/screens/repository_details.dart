@@ -41,6 +41,12 @@ class RepositoryDetails extends ConsumerWidget {
   }
 
   Widget _buildBody(BuildContext context, Repository repository) {
+    void onTapHeader() {
+      // ユーザーのリポジトリ一覧へ飛ぶ
+      final query = SearchQuery(keywords: "user:${repository.owner}");
+      context.push("/search", extra: query);
+    }
+
     final textTheme = Theme.of(context).textTheme;
 
     final header = ListTile(
