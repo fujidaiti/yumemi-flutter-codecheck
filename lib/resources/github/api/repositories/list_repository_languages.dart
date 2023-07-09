@@ -7,9 +7,10 @@ import 'package:yumemi_flutter_codecheck/resources/github/exceptions/unexpected_
 Future<ListRepositoryLanguagesResult> listRepositoryLanguages({
   required String repository,
   required String owner,
+  GitHubApiClient? client,
 }) async {
   return parseResponse(
-    await GitHubApiClient().getJson(
+    await (client ?? GitHubApiClient()).getJson(
       endpoint: "/repos/$owner/$repository/languages",
     ),
   );

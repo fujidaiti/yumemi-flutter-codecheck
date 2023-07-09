@@ -8,11 +8,12 @@ Future<SearchPullRequestsResult> searchPullRequests({
   required String repository,
   required String owner,
   required bool isOpen,
+  GitHubApiClient? client,
 }) async {
   final state = isOpen ? "open" : "closed";
   //s earch/issues?q=is:pr+state:open+repo:flutter/flutter&per_page=1
   return parseResponse(
-    await GitHubApiClient().getJson(
+    await (client ?? GitHubApiClient()).getJson(
       endpoint: "search/issues",
       queryParameters: {
         // 今の所検索結果の数だけ欲しいので`per_page=1`とする
