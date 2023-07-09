@@ -72,6 +72,10 @@ class RepositoryDetails extends ConsumerWidget {
           child: Text(
             text,
             style: Theme.of(context).textTheme.bodyLarge,
+            // たまにREADMEをdescriptionに貼り付けているリポジトリがあるため、
+            // 一応行数を制限する
+            maxLines: 10,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
     };
