@@ -92,7 +92,7 @@ class SearchBox extends HookWidget {
         shape: StadiumBorder(),
       ),
       child: Material(
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.surfaceVariant,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
