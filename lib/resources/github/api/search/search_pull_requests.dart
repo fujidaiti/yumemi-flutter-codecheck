@@ -11,7 +11,6 @@ Future<SearchPullRequestsResult> searchPullRequests({
   GitHubApiClient? client,
 }) async {
   final state = isOpen ? "open" : "closed";
-  //s earch/issues?q=is:pr+state:open+repo:flutter/flutter&per_page=1
   return parseResponse(
     await (client ?? GitHubApiClient()).getJson(
       endpoint: "search/issues",
