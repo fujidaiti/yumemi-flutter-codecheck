@@ -18,7 +18,11 @@ https://fujidaiti.github.io/yumemi-flutter-codecheck/#/
 
 システムのテーマ（Dark/Light）に合わせてアプリのテーマも切り替わります。
 
-<img src="contents/darktheme.mov" width="260"/>
+<div align="center">
+<img src="https://github.com/fujidaiti/yumemi-flutter-codecheck/assets/68946713/481bf951-5262-4e01-bec2-6bc12c592792" width="250"/>
+<img src="https://github.com/fujidaiti/yumemi-flutter-codecheck/assets/68946713/9a30dae9-6789-4c2a-9775-7b93ce9dc808" width="250"/>
+<img src="https://github.com/fujidaiti/yumemi-flutter-codecheck/assets/68946713/4e2bd515-a719-4827-92c6-bda55b801937" width="250"/>
+</div>
 
 ## 実行
 
