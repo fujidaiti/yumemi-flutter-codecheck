@@ -76,7 +76,9 @@ flutter pub run -d <device-id> --dart-define DataType=fake
 ```shell
 # 静的解析
 flutter analyze
-# テスト
+
+# テスト（Mockitoによるコード生成が必要）
+flutter pub run build_runner build --delete-conflicting-outputs && \
 flutter test
 ```
 
