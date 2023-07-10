@@ -12,13 +12,13 @@ https://fujidaiti.github.io/yumemi-flutter-codecheck/#/
 
 #### デモ動画
 
-<img src="contents/demo.mp4" width="260"/>
+<img src="contents/demo.mov" width="260"/>
 
 ## ダークモード
 
 システムのテーマ（Dark/Light）に合わせてアプリのテーマも切り替わります。
 
-<img src="contents/dark-theme.mp4" width="260"/>
+<img src="contents/darktheme.mov" width="260"/>
 
 ## 実行
 
