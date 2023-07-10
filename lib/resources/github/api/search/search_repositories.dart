@@ -8,11 +8,12 @@ Future<SearchRepositoriesResult> searchRepositories({
   required String query,
   required int page,
   required int perPage,
+  GitHubApiClient? client,
 }) async {
   assert(page > 0);
   assert(perPage > 0);
   return parseResponse(
-    await GitHubApiClient().getJson(
+    await (client ?? GitHubApiClient()).getJson(
       endpoint: "/search/repositories",
       queryParameters: {
         "q": query,

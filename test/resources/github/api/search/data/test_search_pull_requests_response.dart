@@ -5,7 +5,8 @@
 ///   -H "X-GitHub-Api-Version: 2022-11-28" \
 ///   "https://api.github.com/search/issues?q=is:pr+state:open+repo:flutter/flutter&per_page=1"
 /// ```
-const testSearchPullRequestsResponse = {
+const testSearchPullRequestsResponse = r'''
+{
   "total_count": 152,
   "incomplete_results": false,
   "items": [
@@ -115,4 +116,5 @@ const testSearchPullRequestsResponse = {
       "score": 1.0
     }
   ]
-};
+}
+''';

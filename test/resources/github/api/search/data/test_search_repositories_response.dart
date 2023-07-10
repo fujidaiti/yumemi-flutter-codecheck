@@ -6,7 +6,8 @@
 ///  -H "X-GitHub-Api-Version: 2022-11-28" \
 ///  "https://api.github.com/search/repositories?q=flutter&per_page=1"
 /// ```
-const testSearchRepositoriesResponse = {
+const testSearchRepositoriesResponse = r'''
+{
   "total_count": 549751,
   "incomplete_results": false,
   "items": [
@@ -170,4 +171,5 @@ const testSearchRepositoriesResponse = {
       "score": 1.0
     }
   ]
-};
+}
+''';
