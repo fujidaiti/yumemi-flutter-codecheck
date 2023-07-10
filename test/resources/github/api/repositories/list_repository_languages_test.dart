@@ -1,15 +1,38 @@
-import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:mockito/mockito.dart';
 import 'package:yumemi_flutter_codecheck/resources/github/api/repositories/list_repository_languages.dart';
+import 'package:yumemi_flutter_codecheck/resources/github/client.dart';
 
+import '../utils/mock_http_client.dart';
 import 'data/test_list_repository_languages_response.dart';
 
+const _testListRepositoryLanguagesRequeestUrl =
+    "https://api.github.com/repos/flutter/flutter/languages";
+
+const _testListRepositoryLanguagesRequestHeader = {
+  "accept": "application/vnd.github+json"
+};
+
 void main() {
-  group("parseResponse", () {
-    test("正しいフォーマットのJsonをパースできる", () {
-      final response = jsonDecode(testListRepositoryLanguagesResponse);
-      final result = parseResponse(response);
+  group("listRepositoryLanguages", () {
+    test("正しいクエリからリポジトリの言語一覧を取得しパースできる", () async {
+      final mockHttp = MockClient();
+      when(
+        mockHttp.get(
+          Uri.parse(_testListRepositoryLanguagesRequeestUrl),
+          headers: _testListRepositoryLanguagesRequestHeader,
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(testListRepositoryLanguagesResponse, 200),
+      );
+
+      final result = await listRepositoryLanguages(
+        repository: "flutter",
+        owner: "flutter",
+        client: GitHubApiClient(mockHttp),
+      );
+
       final ListRepositoryLanguagesResult expected = {
         "Dart": 56432459,
         "C++": 129682,
