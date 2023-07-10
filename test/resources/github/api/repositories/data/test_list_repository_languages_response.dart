@@ -1,12 +1,12 @@
 /// 以下のコマンドで取得：
-/// 
+///
 /// ```shell
 /// curl -L \
 ///   -H "Accept: application/vnd.github+json" \
 ///   -H "X-GitHub-Api-Version: 2022-11-28" \
-///   "https://api.github.com/repos/flutter/flutter/languages" 
+///   "https://api.github.com/repos/flutter/flutter/languages"
 /// ```
-const testListRepositoryLanguagesResponse = '''
+const testListRepositoryLanguagesResponse = r'''
 {
   "Dart": 56432459,
   "C++": 129682,
