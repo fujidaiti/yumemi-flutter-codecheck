@@ -13,13 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Flutter version
+        uses: kuhnroyal/flutter-fvm-config-action@v1
+        id: fvm-config-action
+
       - name: Install Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
-
-      - name: Flutter versioin
-        run: flutter --version
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
 
       - name: Install dependencies
         working-directory: ${{ env.package_dir }}
