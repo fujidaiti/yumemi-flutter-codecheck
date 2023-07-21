@@ -147,3 +147,7 @@ $RECYCLE.BIN/
 *.freezed.dart
 *.g.dart
 *.mocks.dart
+
+# FVM
+.fvm/flutter_sdk
+
